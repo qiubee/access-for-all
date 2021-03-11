@@ -111,7 +111,7 @@ Bij Tweakers kom ik gelijk een cookiewall tegen.
 
 ![The first page of tweakers.net is a cookiewall with a button to accept cookies.](testing/tweakers-cookiewall-nojs.png)
 
-Deze cookiewall mag niet volgens de wet en je hebt hier ook geen keuze om coookies niet te accepteren.
+Deze cookiewall mag niet volgens de wet en je hebt hier ook geen keuze om cookies niet te accepteren.
 
 ![Page with message saying 'failed to validate session'.](testing/tweakers-cookie-failed.png)
 
