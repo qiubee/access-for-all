@@ -55,7 +55,7 @@ Als tweede heb ik gekeken naar Tweakers.
 
 ![The first page when visiting Tweakers.net with a message to accept cookies to continue using the website.](testing/tweakers-cookiewall-nojs.png)
 
-Als eerst kreeg ik een melding om cookies te accepteren. Ik vertel meer wat ik heb gevonden over cookies bij [Wat als je cookies uitschakeld?](wat-als-je-cookies-uitschakeld). 
+Als eerst kreeg ik een melding om cookies te accepteren. Ik vertel meer wat ik heb gevonden over cookies bij [Wat als je cookies uitschakeld?](#wat-als-je-cookies-uitschakeld). 
 
 
 ![Homepage of tweakers.net with JavaScript turned off.](testing/tweakers-nojs.png)
