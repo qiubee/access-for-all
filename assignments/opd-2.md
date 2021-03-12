@@ -60,7 +60,7 @@ Als eerst kreeg ik een melding om cookies te accepteren. Ik vertel meer wat ik h
 
 ![Homepage of tweakers.net with JavaScript turned off.](testing/tweakers-nojs.png)
 
-Als ik ze accepteer zie dat de website er compleet uitziet. Alle afbeeldingen laden en ik zie niets dat mist of niet laad. Ook het zoeken werkt. Het enige dat niet werkt is de *meer*-knop en het selecteren van de taal, maar anders dan dat werkt alles.
+Als ik op accepteren klik, zie ik dat de website er compleet uitziet. Alle afbeeldingen laden en ik zie niets dat mist of niet laad. Ook het zoeken werkt. Het enige dat niet werkt is de *meer*-knop en het selecteren van de taal, maar anders dan dat werkt alles.
 
 #### Vimeo
 
