@@ -1,0 +1,33 @@
+{
+  "name": "access-for-all",
+  "version": "0.1.0",
+  "description": "Poll creation website with complete accessibility.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiubee/access-for-all.git"
+  },
+  "keywords": [
+    "accessibility",
+    "poll",
+    "websockets"
+  ],
+  "author": "qiubee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qiubee/access-for-all/issues"
+  },
+  "homepage": "https://github.com/qiubee/access-for-all#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
