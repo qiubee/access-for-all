@@ -5,6 +5,10 @@ function creators(req, res) {
 	});
 }
 
+function creatorProfile(req, res) {
+	res.status(200);
+}
+
 function myPolls(req, res) {
 	const auth = req.headers.authorization;
 	console.log(auth);
@@ -20,3 +24,4 @@ function createCreator(req, res) {
 exports.creators = creators;
 exports.myPolls = myPolls;
 exports.createCreator = createCreator;
+exports.creatorProfile = creatorProfile
