@@ -1,4 +1,4 @@
-{{> pageHeader}}
+{{> userHeader}}
 <h1>Hi, {{username}}!</h1>
 <nav>
 	<ul>
@@ -6,5 +6,11 @@
 		<li><a href="#groups">Ga naar mijn groepen.</a></li>
 	</ul>
 </nav>
+<form action="/join" method="GET">
+	<h2>Zoek een poll</h2>
+	<p>Voer de code in van de poll mee te doen.</p>
+	<label>Code <input name="pollnumber" type="number" placeholder="Voer de code in van de poll" pattern="/[0-9]{8}/g"></label>
+	<input type="submit" value="Ga naar poll">
+</form>
 <h2>Live polls</h2>
 <h2>Mijn groepen</h2>
