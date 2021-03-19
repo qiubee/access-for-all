@@ -6,7 +6,7 @@ function createUser(req, res) {
 	});
 }
 
-function userProfile(req, res) {
+function userOverview(req, res) {
 	const username = req.params.username || "Poller";
 	res.render("userPage", {
 		title: `${username} · Polly`,
@@ -15,4 +15,4 @@ function userProfile(req, res) {
 }
 
 exports.createUser = createUser;
-exports.userProfile = userProfile;
+exports.userOverview = userOverview;
