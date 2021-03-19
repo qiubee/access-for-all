@@ -19,7 +19,7 @@ app.set("view engine", "hbs")
 
 app.use(express.static("public")) // use public folder for static files
 	.use(express.urlencoded({extended: true})) // get data from http body
-	.use(router) // routing
+	.use("/", router) // routing
 	.disable("x-powered-by")
 	.listen(port, function () {
 	console.log(`Listening on localhost:${port}`);
