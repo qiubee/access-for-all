@@ -1,10 +1,12 @@
 {{> creatorHeader}}
+<h1>Hey, creator {{creatorname}}</h1>
 <nav>
 	<ul>
 		{{#if live}}
 		<li><a href="#live-polls">Ga naar de actieve polls.</a></li>
 		{{/if}}
 		<li><a href="#my-polls">Ga naar mijn gemaakte polls.</a></li>
+		<li><a href="#my-groups">Ga naar mijn groepen.</a></li>
 	</ul>
 </nav>
 <main>
@@ -32,19 +34,19 @@
 			<a href="/maker">Update poll(s)</a>
 	{{/if}}
 	<a href="poll-aanmaken">Maak een nieuwe poll aan</a>
-	<h1 id="my-polls">Mijn polls</h1>
+	<h2 id="my-polls">Mijn polls</h2>
 	{{#each polls}}
 	<article>
 		<header>
-			<h2>{{pollTitle}}</h2>
+			<h3>{{pollTitle}}</h3>
 			<p><span>Deze poll is </span>>{{visibility}}<span>.</span></p>
 			<p>{{questionAmount}} vragen</p>
 			<p>Gemaakt op <time datetime=`{{dateString}}`>{{date}}</time></p>
 		</header>
-		<h3>Vragen</h3>
+		<h4>Vragen</h4>
 		{{#each questions}}
 			<section>
-				<h4>{{questionTitle}}</h4>
+				<h5>{{questionTitle}}</h5>
 				<ol>
 					{{#each answers}}
 						<li>{{answer}} <span>heeft {{votes}} stemmen.</span></li>
@@ -55,4 +57,5 @@
 		<a href=`/{{pollURL}}`>Poll bewerken</a>
 	</article>
 	{{/each}}
+	<h2 id="my-groups">Mijn groepen</h2>
 </main>
