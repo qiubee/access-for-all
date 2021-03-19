@@ -3,10 +3,6 @@ const { currentDateTime } = require("../../modules/date");
 
 
 function authenticate(req, res) {
-	// 1. authenticate user
-	// 2. set authorization header
-	// 3. if user is creator redirect to creator view else to user view
-
 	const { username, password } = req.body;
 	const type = req.body.type || "user";
 
@@ -15,7 +11,7 @@ function authenticate(req, res) {
 	// invalid authentications are redirected to login
 	if (!user) {
 		console.log(currentDateTime() + ": User failed to log in");
-		res.setHeader("WWW-Authenticate", "Basic realm=\"Access to the staging site\", charset=\"UTF-8\"");
+		res.set("WWW-Authenticate", "Basic realm=\"Access to the staging site\", charset=\"UTF-8\"");
 		res.status(401);
 		if (type === "creator") {
 			res.redirect("/creator-login");
@@ -24,6 +20,7 @@ function authenticate(req, res) {
 		}
 		return;
 	}
+	
 	// set authorization header if user is verified
 	console.log(currentDateTime() + ": User logged in");
 	req.headers.authorization = "Basic " + Buffer.from(username + ":" + password).toString("base64");
