@@ -5,15 +5,11 @@ function creators(req, res) {
 	});
 }
 
-function creatorProfile(req, res) {
-	res.status(200);
-}
-
-function myPolls(req, res) {
-	const auth = req.headers.authorization;
-	console.log(auth);
-	res.render("myPolls", {
-		title: "Mijn polls · Polly"
+function creatorOverview(req, res) {
+	const creatorname = req.params.creatorname || "Creator";
+	res.render("creatorPage", {
+		title: `${creatorname} (Creator) · Polly`,
+		creatorname: creatorname
 	});
 }
 
@@ -22,6 +18,5 @@ function createCreator(req, res) {
 }
 
 exports.creators = creators;
-exports.myPolls = myPolls;
 exports.createCreator = createCreator;
-exports.creatorProfile = creatorProfile
+exports.creatorOverview = creatorOverview;
