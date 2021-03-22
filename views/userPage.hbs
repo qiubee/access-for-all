@@ -1,16 +1,43 @@
 {{> userHeader}}
-<h1>Hi, {{username}}!</h1>
-<nav>
-	<ul>
-		<li><a href="#live-polls">Ga naar de polls op dit moment.</a></li>
-		<li><a href="#groups">Ga naar mijn groepen.</a></li>
-	</ul>
-</nav>
-<form action="/join" method="GET">
-	<h2>Zoek een poll</h2>
-	<p>Voer de code in van de poll mee te doen.</p>
-	<label>Code <input name="pollnumber" type="number" placeholder="Voer de code in van de poll" pattern="/[0-9]{8}/g"></label>
-	<input type="submit" value="Ga naar poll">
-</form>
-<h2>Live polls</h2>
-<h2>Mijn groepen</h2>
+<main id="content">
+	<h1>Hi, {{username}}!</h1>
+	<nav>
+		<ul>
+			{{#if live}}
+			<li><a href="#live-polls">Ga naar de polls op dit moment</a></li>
+			{{/if}}
+			<li><a href="#join">Zoek een poll</a></li>
+			<li><a href="#groups">Ga naar mijn groepen</a></li>
+		</ul>
+	</nav>
+	<section>
+		<h2 id="join">Zoek een poll</h2>
+		<form action="/join" method="GET">
+			<p>Voer de code in van de poll mee te doen.</p>
+			<label>Code <input name="pollnumber" type="number" placeholder="Voer de code in van de poll" pattern="/[0-9]{8}/g"></label>
+			<input type="submit" value="Ga naar poll">
+		</form>
+	</section>
+
+	{{#if live}}
+			<h2 id="live-polls">Live polls</h2>
+				{{#each activePolls}}
+					<article>
+						<header>
+							<h3>{{pollTitle}}</h3>
+						</header>
+						<section>
+							<form action="/poll" method="POST">
+							<h4>{{questionTitle}}</h4>
+							{{#each answers}}
+							<label><input type="radio" name="{{questionNumber}}" value="{{optionIndex}}">{{answer}}</label>
+							{{/each}}
+							</form>
+						</section>
+						<p>{{pollProgress}}</p>
+					</article>
+				{{/each}}
+				<a href="/maker">Update poll(s)</a>
+		{{/if}}
+	<h2>Mijn groepen</h2>
+</main>
