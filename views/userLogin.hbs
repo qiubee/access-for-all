@@ -1,10 +1,11 @@
 {{> pageHeader}}
-<h1>Login op Polly</h1>
-<form action="/login" method="POST">
-	<label>Gebruikersnaam <input name="username" type="text" minlength="2" maxlength="8"></label>
-	<label>Wachtwoord <input name="password" type="password" pattern="[0-9]{8,16}"></label>
-	<input type="submit" value="Log in">
-</form>
-
-<p>Doe ook mee! <a href="/profiel-aanmaken">Maak een profiel</a> als je er nog geen hebt.</p>
-<p>Ben je een Creator? Ga naar <a href="/creator-login">Log in voor Creators</a>.</p>
+<main id="content">
+	<h1>Login op Polly</h1>
+	<form action="/login" method="POST">
+		<label>Gebruikersnaam <input name="username" type="text" minlength="2" maxlength="8"></label>
+		<label>Wachtwoord <input name="password" type="password" pattern="[0-9]{8,16}"></label>
+		<input type="submit" value="Log in">
+	</form>
+	<p>Doe ook mee! <a href="/profiel-aanmaken">Maak een profiel</a> als je er nog geen hebt.</p>
+	<p>Ben je een Creator? Ga naar <a href="/creator-login">Log in voor Creators</a>.</p>
+</main>

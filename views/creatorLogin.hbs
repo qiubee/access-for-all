@@ -1,4 +1,5 @@
 {{> pageHeader}}
+<main id="content">
 <h1>Login als Creator</h1>
 <form action="/login" method="POST">
 	<label>Gebruikersnaam <input name="username" type="text" minlength="2" maxlength="10"></label>
@@ -6,5 +7,5 @@
 	<input type="hidden" name="type" value="creator">
 	<input type="submit" value="Log in">
 </form>
-
 <p>Wil je Creator worden? <a href="/creator-profiel-aanmaken">Maak een Creator-profiel</a>.</p>
+</main>

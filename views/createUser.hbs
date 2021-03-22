@@ -1,8 +1,10 @@
 {{> pageHeader}}
-<h1>Nieuw profiel maken</h1>
-<form action="/create" method="POST">
-	<label>Naam <input name="name" type="text" minlength="2" maxlength="14"></label>
-	<label>Gebruikersnaam <input name="username" type="text" minlength="3" maxlength="16" pattern="^[a-zA-Z]{3,16}$" ></label>
-	<label>Wachtwoord <input name="password" type="password" minlength="8"></label>
-	<input type="submit" value="Profiel aanmaken">
-</form>
+<main id="content">
+	<h1>Nieuw profiel maken</h1>
+	<form action="/create" method="POST">
+		<label>Naam <input name="name" type="text" minlength="2" maxlength="14"></label>
+		<label>Gebruikersnaam <input name="username" type="text" minlength="3" maxlength="16" pattern="^[a-zA-Z]{3,16}$"></label>
+		<label>Wachtwoord <input name="password" type="password" minlength="8"></label>
+		<input type="submit" value="Profiel aanmaken">
+	</form>
+</main>
