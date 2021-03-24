@@ -1,9 +1,15 @@
 {{> pageHeader}}
 <main id="content">
 	<h1>Login op Polly</h1>
+	{{#if loginFailed}}
+	<div>
+		<p>Inloggen is niet gelukt.</p>
+		<p>De gebruikersnaam of het wachtwoord is niet correct.</p>
+	</div>
+	{{/if}}
 	<form action="/login" method="POST">
-		<label>Gebruikersnaam <input name="username" type="text" minlength="2" maxlength="8"></label>
-		<label>Wachtwoord <input name="password" type="password" pattern="[0-9]{8,16}"></label>
+		<label>Gebruikersnaam <input name="username" type="text"></label>
+		<label>Wachtwoord <input name="password" type="password"></label>
 		<input type="submit" value="Log in">
 	</form>
 	<p>Doe ook mee! <a href="/profiel-aanmaken">Maak een profiel</a> als je er nog geen hebt.</p>

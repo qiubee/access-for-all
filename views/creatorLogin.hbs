@@ -1,9 +1,15 @@
 {{> pageHeader}}
 <main id="content">
 <h1>Login als Creator</h1>
+{{#if loginFailed}}
+	<div>
+		<p>Inloggen is niet gelukt.</p>
+		<p>De gebruikersnaam of het wachtwoord is niet correct.</p>
+	</div>
+{{/if}}
 <form action="/login" method="POST">
-	<label>Gebruikersnaam <input name="username" type="text" minlength="2" maxlength="10"></label>
-	<label>Wachtwoord <input name="password" type="password" minlength="8"></label>
+	<label>Gebruikersnaam <input name="username" type="text"></label>
+	<label>Wachtwoord <input name="password" type="password"></label>
 	<input type="hidden" name="type" value="creator">
 	<input type="submit" value="Log in">
 </form>
