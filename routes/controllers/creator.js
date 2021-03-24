@@ -1,3 +1,5 @@
+const file = require("../../modules/file");
+
 function creators(req, res) {
 	res.render("creators", {
 		title: "Word Creator · Polly",
@@ -7,9 +9,15 @@ function creators(req, res) {
 
 function creatorOverview(req, res) {
 	const creatorname = req.params.creatorname || "Creator";
+	const allPolls = file.readJSON("/data/polls.json");
+	const creatorPolls = allPolls.filter(function (poll) {
+		return poll.creator === creatorname;
+	});
 	res.render("creatorPage", {
 		title: `${creatorname} (Creator) · Polly`,
-		creatorname: creatorname
+		creatorname: creatorname,
+		myPolls: creatorPolls,
+		polls: creatorPolls
 	});
 }
 
