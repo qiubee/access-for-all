@@ -1,6 +1,18 @@
 {{> creatorHeader}}
 <main id="content">
 	<form action="/edit-poll" method="POST">
+	<div>
+		<label><span>Titel poll: </span><input type="text" name="title" minlength="2" maxlength="56" value="{{pollname}}"></label>
+	</div>
+	{{#if questions}}
+	<ol>
+		{{#each question}}
+		<li><label>Vraag <input type="number" name="order" value="{{index}}" min="0" max="10"></label>: {{question}} <a href="/vraag-{{index}}"><span>Vraag {{index}} </span>bewerken</a></li>
+		{{/each}}
+	</ol>
+	{{/if}}
+	<a href="vraag-toevoegen">Maak nieuwe vraag</a>
 	<input type="submit" value="Wijzigingen opslaan">
 	</form>
+	<a href="instellingen">Instellingen</a>
 </main>
