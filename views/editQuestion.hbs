@@ -11,7 +11,7 @@
 			{{/each}}
 		</ol>
 		{{#if nextOption}}
-			<a href="/c/{{creatorname}}/poll/{{pollID}}/vraag-toevoegen{{optionCount}}">Antwoord toevoegen</a>
+			<a href="/c/{{creatorname}}/poll/{{pollId}}/vraag-toevoegen{{optionCount}}">Antwoord toevoegen</a>
 		{{/if}}
 	</fieldset>
 	<label>Tijd om op vraag te antwoorden:
@@ -24,7 +24,7 @@
 		</select>
 	</label>
 	<label><input type="checkbox" name="inactive"> Vraag inactief maken</label>
-	<input type="hidden" name="pollId" value="{{pollID}}">
+	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creator" value="{{creatorname}}">
 	<div>
 		<input type="submit" value="Vraag toevoegen">
