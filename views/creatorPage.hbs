@@ -54,7 +54,7 @@
 			{{else}}
 			<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Voeg een vraag toe</a><span>.</span></p>
 			{{/if}}
-			<p>Bijgewerkt op <time datetime=`{{modified}}`><span>{{modified}}</span></time></p>
+			<p>Bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
 			<a href="/c/{{creator}}/poll/{{pollId}}/edit">Poll bewerken</a>
 		</article>
 		{{/each}}
@@ -66,7 +66,7 @@
 		<ul>
 			{{#each group}}
 			<li>
-				<a href="/groep/{{groupname}}">{{groupname}}</a>
+				<a href="/c/{{creatorname}}/groep/{{name}}">{{name}}</a>
 			</li>
 			{{/each}}
 		</ul>
