@@ -2,12 +2,14 @@
 <main id="content">
 	<form action="/edit-poll" method="POST">
 	<div>
-		<label><span>Titel poll: </span><input type="text" name="title" minlength="2" maxlength="56" value="{{pollname}}"></label>
+		<label><span>Titel: </span><input type="text" name="title" value="{{pollname}}"></label>
 	</div>
 	{{#if questions}}
 	<ol>
 		{{#each question}}
-		<li><label>Vraag <input type="number" name="order" value="{{index}}" min="0" max="10"></label>: {{question}} <a href="/vraag-{{index}}"><span>Vraag {{index}} </span>bewerken</a></li>
+		<li><label>Vraag <input type="number" name="order" value="{{index}}" min="1" max="10"></label>: {{question}} 
+		<p><span>Vraag </span><a href="vraag-{{index}}">bewerken</a><span> of </span><a href="vraag-verwijderen">verwijderen</a><span>.</span></p>
+		</li>
 		{{/each}}
 	</ol>
 	{{/if}}
