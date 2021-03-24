@@ -40,23 +40,22 @@
 		{{#each polls}}
 		<article>
 			<header>
-				<h3>{{pollTitle}}</h3>
-				<p><span>Deze poll is </span>>{{visibility}}<span>.</span></p>
-				<p>{{questionAmount}} vragen</p>
-				<p>Gemaakt op <time datetime=`{{dateString}}`>{{date}}</time></p>
+				<h3>{{title}}</h3>
+				<p><span><span>Deze poll is </span>{{visibility}}</span>
+				<span><span>en heeft </span>{{questionCount}} vragen<span>.</span></span></p>
 			</header>
+			{{#if pollQuestions}}
 			<h4>Vragen</h4>
 			{{#each questions}}
-				<section>
-					<h5>{{questionTitle}}</h5>
-					<ol>
-						{{#each answers}}
-							<li>{{answer}} <span>heeft {{votes}} stemmen.</span></li>
-						{{/each}}
-					</ol>
-				</section>
-			{{/each}}		
-			<a href=`/{{pollURL}}`>Poll bewerken</a>
+				<ol>
+					<li>Vraag {{index}}: {{title}}</li>
+				</ol>
+			{{/each}}
+			{{else}}
+			<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Voeg een vraag toe</a><span>.</span></p>
+			{{/if}}
+			<p>Bijgewerkt op <time datetime=`{{modified}}`><span>{{modified}}</span></time></p>
+			<a href="/c/{{creator}}/poll/{{pollId}}/edit">Poll bewerken</a>
 		</article>
 		{{/each}}
 	{{else}}
