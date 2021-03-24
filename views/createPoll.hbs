@@ -10,18 +10,15 @@
 		</label>
 		<label><input checked type="radio" name="visibility" value="private">Priv&eacute; (alleen zichtbaar voor jou)</label>
 	</fieldset>
-	<fieldset>
-		<legend>Tijd per vraag instellen</legend>
-		<label>Kies de standaard tijd om te antwoorden op een vraag:
-			<select name="timer">
-				<option value="60" selected>1 minuut</option>
-				<option value="120">2 minuten</option>
-				<option value="180">3 minuten</option>
-				<option value="240">4 minuten</option>
-				<option value="300">5 minuten</option>
-			</select>
-		</label>
-	</fieldset>
+	<label>Kies de standaard tijd om te antwoorden per vraag:
+		<select name="timer">
+			<option value="60" selected>1 minuut</option>
+			<option value="120">2 minuten</option>
+			<option value="180">3 minuten</option>
+			<option value="240">4 minuten</option>
+			<option value="300">5 minuten</option>
+		</select>
+	</label>
 	<input type="hidden" name="creatorname" value="{{creatorname}}">
 	<input type="submit" value="Maak poll">
 	</form>
