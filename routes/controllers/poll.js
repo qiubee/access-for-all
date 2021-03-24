@@ -93,8 +93,8 @@ function addPoll(req, res) {
 		checked: true,
 		timeInSeconds: newPoll.timePerQuestion
 	};
-	newPoll.modified = `${currentDateTime()}`;
-	newPoll.created = `${currentDateTime()}`;
+	newPoll.modified = currentDateTime();
+	newPoll.created = currentDateTime();
 
 	delete newPoll.timePerQuestion;
 	delete newPoll.creatorname;
