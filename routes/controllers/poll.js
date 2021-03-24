@@ -1,6 +1,6 @@
 const db = require("./../../modules/database");
 const file = require("./../../modules/file");
-const { currentDateTime } = require("../../modules/date");
+const { currentDateTime, dateStringToSentence } = require("../../modules/date");
 
 function poll(req, res) {
 	const params = req.params;
@@ -29,9 +29,6 @@ function pollEditor(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
 	const allPolls = file.readJSON("data/polls.json");
-	// 1. find poll
-	// 2. add poll name to variable
-
 	const poll = allPolls.find(function (poll) {
 		return poll.pollId === pollId;
 	});
@@ -95,6 +92,9 @@ function addPoll(req, res) {
 	};
 	newPoll.modified = currentDateTime();
 	newPoll.created = currentDateTime();
+	newPoll.modifiedSentence = dateStringToSentence(newPoll.modified);
+	newPoll.createdSentence = dateStringToSentence(newPoll.created);
+
 
 	delete newPoll.timePerQuestion;
 	delete newPoll.creatorname;
