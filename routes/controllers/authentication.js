@@ -40,8 +40,8 @@ function authenticate(req, res) {
 }
 
 function authorized(req, res, next) {
-	console.log(currentDateTime() + ": Verifying user...");
-	console.log(req.header('Authorization'));
+	// console.log(currentDateTime() + ": Verifying user...");
+	// console.log(req.header('Authorization'));
 	// const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
   	// const login = Buffer.from(b64auth, "base64").toString().split(":");
 	// console.log(b64auth, login);
