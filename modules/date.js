@@ -26,17 +26,26 @@ function currentTime() {
 }
 
 function getNameofDay(dateString) {
-    console.log(dateString);
     const days = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
     const date = new Date(dateString);
     return days[date.getDay()];
 }
 
 function getNameofMonth(dateString) {
-    console.log(dateString);
-    const days = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+    const months = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
     const date = new Date(dateString);
-    console.log(days[date.getMonth()]);
+    return months[date.getMonth()];
+}
+
+function dateStringToSentence(dateString) {
+    const date = new Date(dateString);
+    const dayname = getNameofDay(date);
+    const monthname = getNameofMonth(date).toLowerCase();
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const hours = date.getHours() === 0 ? 24 : date.getHours();
+    const minutes = date.getMinutes();
+    return `${dayname} ${day} ${monthname} ${year} om ${hours} uur ${minutes}`;
 }
 
 exports.currentDateTime = currentDateTime;
@@ -44,3 +53,4 @@ exports.currentDate = currentDate;
 exports.currentTime = currentTime;
 exports.getNameofDay = getNameofDay;
 exports.getNameofMonth = getNameofMonth;
+exports.dateStringToSentence = dateStringToSentence;
