@@ -18,8 +18,8 @@ router.get("/", index)
 	.get("/c/:creatorname([a-zA-Z]{2,10})", authorized, creatorOverview)
 	.get("/u/:username([a-zA-Z]{3,16})", authorized, userOverview)
 	.get("/c/:creatorname([a-zA-Z]{2,10})/maak-poll", authorized, pollCreator)
-	.get("/c/:creatorname([a-zA-Z]{2,10})/maak-poll", authorized, pollEditor)
-	.get("/poll/:pollID(\d{8})", poll)
+	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/edit", authorized, pollEditor)
+	.get("/poll/:pollId([0-9]{8,})", poll)
 	.post("/login", authenticate)
 	.post("/maak-poll", addPoll);
 
