@@ -1,0 +1,21 @@
+{{> creatorHeader}}
+<main id="content">
+<h1>Maak nieuwe vraag</h1>
+<form action="/vraag-toevoegen" method="POST">
+	<label>Vraag: <input type="text" name="title"></label>
+	<fieldset>
+		<legend>Antwoorden</legend>
+		<ol>
+			{{#each options}}
+			<li><label>Optie {{this}}: <input type="text" name="options"></label></li>
+			{{/each}}
+		</ol>
+		{{#if nextOption}}
+			<a href="/c/{{creatorname}}/poll/{{pollID}}/vraag-toevoegen{{optionCount}}">Antwoord toevoegen</a>
+		{{/if}}
+	</fieldset>
+	<input type="hidden" name="pollId" value="{{pollID}}">
+	<input type="hidden" name="creator" value="{{creatorname}}">
+	<input type="submit" value="Vraag toevoegen">
+</form>
+</main>
