@@ -4,7 +4,7 @@
 	<nav>
 		<ul>
 			{{#if live}}
-			<li><a href="#live-polls">Ga naar de polls op dit moment</a></li>
+				<li><a href="#live-polls">Ga naar de polls op dit moment</a></li>
 			{{/if}}
 			<li><a href="#join">Zoek een poll</a></li>
 			<li><a href="#groups">Ga naar mijn groepen</a></li>
@@ -18,26 +18,44 @@
 			<input type="submit" value="Ga naar poll">
 		</form>
 	</section>
-
+	
 	{{#if live}}
-			<h2 id="live-polls">Live polls</h2>
-				{{#each activePolls}}
-					<article>
-						<header>
-							<h3>{{pollTitle}}</h3>
-						</header>
-						<section>
-							<form action="/poll" method="POST">
-							<h4>{{questionTitle}}</h4>
-							{{#each answers}}
-							<label><input type="radio" name="{{questionNumber}}" value="{{optionIndex}}">{{answer}}</label>
-							{{/each}}
-							</form>
-						</section>
-						<p>{{pollProgress}}</p>
-					</article>
+	<section>
+		<h2 id="live-polls">Live polls</h2>
+			{{#each activePolls}}
+				<article>
+					<header>
+						<h3>{{pollTitle}}</h3>
+					</header>
+					<section>
+						<form action="/poll" method="POST">
+						<h4>{{questionTitle}}</h4>
+						{{#each answers}}
+						<label><input type="radio" name="{{questionNumber}}" value="{{optionIndex}}">{{answer}}</label>
+						{{/each}}
+						</form>
+					</section>
+					<p>{{pollProgress}}</p>
+				</article>
+			{{/each}}
+		<a href="/u/{{username}}">Update poll(s)</a>
+	</section>
+	{{/if}}
+
+	<section>
+		<h2>Mijn groepen</h2>
+		{{#if groups}}
+			<ul>
+				{{#each group}}
+				<li>
+					<a href="/groep/{{groupname}}">{{groupname}}</a>
+				</li>
 				{{/each}}
-				<a href="/maker">Update poll(s)</a>
+			</ul>
+		{{else}}
+		<p>Je bent nog niet aangesloten bij een groep. Zoek naar een groep en sluit je aan.</p>
+		<a href="/groepen">Groep zoeken</a>
 		{{/if}}
-	<h2>Mijn groepen</h2>
+	</section>
+	
 </main>
