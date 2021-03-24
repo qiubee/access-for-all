@@ -14,6 +14,16 @@
 			<a href="/c/{{creatorname}}/poll/{{pollID}}/vraag-toevoegen{{optionCount}}">Antwoord toevoegen</a>
 		{{/if}}
 	</fieldset>
+	<label>Tijd om op vraag te antwoorden:
+		<select name="timer">
+			<option value="60" selected>1 minuut</option>
+			<option value="120">2 minuten</option>
+			<option value="180">3 minuten</option>
+			<option value="240">4 minuten</option>
+			<option value="300">5 minuten</option>
+		</select>
+	</label>
+	<label><input type="checkbox" name="inactive"> Vraag inactief maken</label>
 	<input type="hidden" name="pollId" value="{{pollID}}">
 	<input type="hidden" name="creator" value="{{creatorname}}">
 	<input type="submit" value="Vraag toevoegen">
