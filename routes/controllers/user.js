@@ -1,4 +1,4 @@
-const { readFromFile } = require("../../modules/file");
+const file = require("../../modules/file");
 
 function createUser(req, res) {
 	res.render("createUser", {
@@ -8,6 +8,7 @@ function createUser(req, res) {
 
 function userOverview(req, res) {
 	const username = req.params.username || "Poller";
+	const allPolls = file.readJSON("/data/polls.json");
 	res.render("userPage", {
 		title: `${username} · Polly`,
 		username: username
