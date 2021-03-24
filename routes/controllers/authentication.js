@@ -11,19 +11,25 @@ function authenticate(req, res) {
 	// invalid authentications are redirected to login
 	if (!user) {
 		console.log(currentDateTime() + ": User failed to log in");
-		res.set("WWW-Authenticate", "Basic realm=\"Access to the staging site\", charset=\"UTF-8\"");
+		// res.set("WWW-Authenticate", "Basic realm=\"Access to the staging site\", charset=\"UTF-8\"");
 		res.status(401);
 		if (type === "creator") {
-			res.redirect("/creator-login");
+			res.render("creatorLogin", {
+				title: "Login als Maker · Polly",
+				loginFailed: true
+			});
 		} else {
-			res.redirect("/login");
+			res.render("userLogin", {
+				title: "Login · Polly",
+				loginFailed: true
+			});
 		}
 		return;
 	}
 	
 	// set authorization header if user is verified
 	console.log(currentDateTime() + ": User logged in");
-	req.headers.authorization = "Basic " + Buffer.from(username + ":" + password).toString("base64");
+	// req.headers.authorization = "Basic " + Buffer.from(username + ":" + password).toString("base64");
 
 	// redirect to user page
 	if (user.type === "user") {
@@ -36,9 +42,9 @@ function authenticate(req, res) {
 function authorized(req, res, next) {
 	console.log(currentDateTime() + ": Verifying user...");
 	console.log(req.header('Authorization'));
-	const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
-  	const login = Buffer.from(b64auth, "base64").toString().split(":");
-	console.log(b64auth, login);
+	// const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
+  	// const login = Buffer.from(b64auth, "base64").toString().split(":");
+	// console.log(b64auth, login);
 
 	next();
 }
