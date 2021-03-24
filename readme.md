@@ -17,9 +17,9 @@ Create polls, share polls, join and vote!
 
 The main functionalities of Polly consists of:
 
-1. Creating a poll with the option to add up to 5 questions, and for each question up to 5 answers. The creator can choose the order of the questions being asked. Each question has a set time for users to vote.
-2. Joining a poll and vote. The creator of the poll can control when the result will be shown.
-3. Joining a group. Polls created by the creator of the group are only accessible to members, and members will be immediately notified when a new poll has been started.
+1. **Creating a poll** with the option to add up to 5 questions, and for each question up to 5 answers. The creator can choose the order of the questions being asked. Each question has a set time for users to vote.
+2. **Joining a poll and vote**. The creator of the poll can control when the result will be shown.
+3. **Joining a group with polls only for members**. Polls created by the creator of the group are only accessible to members, and members will immediately be notified when a new poll has been started.
 
 ## Wireflow
 
