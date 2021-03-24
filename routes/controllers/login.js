@@ -11,5 +11,5 @@ function userLogin(req, res) {
 }
 
 
-exports.creatorLogin = creatorLogin;
-exports.userLogin = userLogin;
+exports.creator = creatorLogin;
+exports.user = userLogin;

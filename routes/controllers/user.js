@@ -14,5 +14,5 @@ function userOverview(req, res) {
 	});
 }
 
-exports.createUser = createUser;
-exports.userOverview = userOverview;
+exports.create = createUser;
+exports.overview = userOverview;

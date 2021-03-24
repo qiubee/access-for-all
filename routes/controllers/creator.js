@@ -17,6 +17,6 @@ function createCreator(req, res) {
 	const headers = req.headers;
 }
 
-exports.creators = creators;
-exports.createCreator = createCreator;
-exports.creatorOverview = creatorOverview;
+exports.infoPage = creators;
+exports.create = createCreator;
+exports.overview = creatorOverview;

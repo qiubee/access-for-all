@@ -88,12 +88,17 @@ function editPoll(req, res) {
 	
 }
 
-exports.searchPolls = searchPolls;
+function editQuestion(req, res) {
+	
+}
+
+exports.search = searchPolls;
 exports.poll = poll;
-exports.pollCreator = pollCreator;
-exports.pollEditor = pollEditor;
-exports.questionCreator = questionCreator;
-exports.questionEditor = questionEditor;
-exports.addPoll = addPoll;
+exports.creator = pollCreator;
+exports.editor = pollEditor;
+exports.createQuestion = questionCreator;
+exports.editQuestion = questionEditor;
+exports.add = addPoll;
 exports.addQuestion = addQuestion;
-exports.editPoll = editPoll;
+exports.edit = editPoll;
+exports.editQuestion = editQuestion;
