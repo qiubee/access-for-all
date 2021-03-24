@@ -31,10 +31,41 @@ function pollEditor(req, res) {
 	const pollname = "titel"; // temporary
 	res.render("editPoll", {
 		title: `Poll bewerken · ${creatorname} | Polly`,
-		pollname: pollname || "titel"
+		pollname: pollname || "titel",
+		creatorname: creatorname
 	});
 }
 
+function questionCreator(req, res) {
+	const data = req.params;
+	const optionCount = parseInt(req.params.options) || 2;
+	// add option
+	let options = [];
+	for (let i=0; i < optionCount; i++) {
+		options.push(i+1);
+	}
+	// redirect to page with 5 options if options exceed 5
+	if (optionCount > 5) {
+		res.redirect(`/c/${data.creatorname}/poll/${data.pollId}/vraag-toevoegen5`);
+	}
+	res.render("createQuestion", {
+		title: `Vraag toevoegen · ${data.creatorname} | Polly`,
+		pollID: data.pollId,
+		creatorname: data.creatorname,
+		optionCount: optionCount + 1,
+		nextOption: optionCount > 4 ? false : true,
+		options: options
+	});
+}
+
+function questionEditor(req, res) {
+	const questionIndex = req.params.question;
+	res.render("editQuestion", {
+		title: `Vraag ${questionIndex} bewerken · ${req.params.creatorname} | Polly`
+	});
+}
+
+// data processing
 function addPoll(req, res) {
 	const pollData = req.body;
 	const creatorname = req.body.creatorname;
@@ -45,7 +76,12 @@ function addPoll(req, res) {
 	// 3. forward to edit poll page
 	// 4. get pollID
 	const pollID = "00000000";
-	res.redirect(`/c/${creatorname}/${pollID}/edit`);
+	res.redirect(`/c/${creatorname}/poll/${pollID}/edit`);
+}
+
+function addQuestion(req, res) {
+	const questionData = req.body;
+	console.log(questionData);
 }
 
 function editPoll(req, res) {
@@ -56,5 +92,8 @@ exports.searchPolls = searchPolls;
 exports.poll = poll;
 exports.pollCreator = pollCreator;
 exports.pollEditor = pollEditor;
+exports.questionCreator = questionCreator;
+exports.questionEditor = questionEditor;
 exports.addPoll = addPoll;
+exports.addQuestion = addQuestion;
 exports.editPoll = editPoll;
