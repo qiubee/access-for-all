@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-function writeJSONFile(data, sourcepath) {
+function writeJSONFile(sourcepath, data) {
 	try {
-		fs.writeFileSync(path, JSON.stringify(data));
+		fs.writeFileSync(path.join(__dirname, "../") + sourcepath, JSON.stringify(data));
 	} catch (err) {
 		console.log(err);
 	}
@@ -17,5 +17,14 @@ function readFile(sourcepath) {
 	}
 }
 
-exports.writeToJSONFile = writeJSONFile;
-exports.readFromFile = readFile;
+function readJSONFile(sourcepath) {
+	try {
+		return JSON.parse(readFile(sourcepath));
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.writeToJSON = writeJSONFile;
+exports.read = readFile;
+exports.readJSON = readJSONFile;
