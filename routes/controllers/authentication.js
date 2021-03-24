@@ -35,7 +35,7 @@ function authenticate(req, res) {
 	if (user.type === "user") {
 		res.redirect(`/u/${username}`);
 	} else if (user.type === "creator") {
-		res.redirect(`/c/${username}/mijn-polls`);
+		res.redirect(`/c/${username}`);
 	}
 }
 
