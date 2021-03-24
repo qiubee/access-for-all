@@ -28,12 +28,18 @@ function pollCreator(req, res) {
 function pollEditor(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
+	const allPolls = file.readJSON("data/polls.json");
 	// 1. find poll
 	// 2. add poll name to variable
-	const pollname = "titel"; // temporary
+
+	const poll = allPolls.find(function (poll) {
+		return poll.pollId === pollId;
+	});
+
+	console.log(poll);
 	res.render("editPoll", {
 		title: `Poll bewerken · ${creatorname} | Polly`,
-		pollname: pollname || "titel",
+		pollname: poll.title || "titel",
 		creatorname: creatorname
 	});
 }
