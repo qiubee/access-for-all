@@ -36,27 +36,45 @@
 	{{/if}}
 	<a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>
 	<h2 id="my-polls">Mijn polls</h2>
-	{{#each polls}}
-	<article>
-		<header>
-			<h3>{{pollTitle}}</h3>
-			<p><span>Deze poll is </span>>{{visibility}}<span>.</span></p>
-			<p>{{questionAmount}} vragen</p>
-			<p>Gemaakt op <time datetime=`{{dateString}}`>{{date}}</time></p>
-		</header>
-		<h4>Vragen</h4>
-		{{#each questions}}
-			<section>
-				<h5>{{questionTitle}}</h5>
-				<ol>
-					{{#each answers}}
-						<li>{{answer}} <span>heeft {{votes}} stemmen.</span></li>
-					{{/each}}
-				</ol>
-			</section>
-		{{/each}}		
-		<a href=`/{{pollURL}}`>Poll bewerken</a>
-	</article>
-	{{/each}}
+	{{#if myPolls}}
+		{{#each polls}}
+		<article>
+			<header>
+				<h3>{{pollTitle}}</h3>
+				<p><span>Deze poll is </span>>{{visibility}}<span>.</span></p>
+				<p>{{questionAmount}} vragen</p>
+				<p>Gemaakt op <time datetime=`{{dateString}}`>{{date}}</time></p>
+			</header>
+			<h4>Vragen</h4>
+			{{#each questions}}
+				<section>
+					<h5>{{questionTitle}}</h5>
+					<ol>
+						{{#each answers}}
+							<li>{{answer}} <span>heeft {{votes}} stemmen.</span></li>
+						{{/each}}
+					</ol>
+				</section>
+			{{/each}}		
+			<a href=`/{{pollURL}}`>Poll bewerken</a>
+		</article>
+		{{/each}}
+	{{else}}
+	<p>Je hebt nog geen polls gemaakt. <a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>.</p>
+	{{/if}}
 	<h2 id="my-groups">Mijn groepen</h2>
+	{{#if groups}}
+		<ul>
+			{{#each group}}
+			<li>
+				<a href="/groep/{{groupname}}">{{groupname}}</a>
+			</li>
+			{{/each}}
+		</ul>
+		<a href="/groep-aanmaken">Maak een nieuwe groep aan</a>
+	{{else}}
+	<p>Je bent nog niet aangesloten bij een groep. Je kunt zelf een groep maken of zoeken naar een groep om bij aan te sluiten.</p>
+	<a href="/groep-aanmaken">Maak een nieuwe groep aan</a>
+	<a href="/groepen">Groep zoeken</a>
+	{{/if}}
 </main>
