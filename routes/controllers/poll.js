@@ -1,5 +1,6 @@
-const db = require("./../../modules/database");
-const file = require("./../../modules/file");
+const db = require("../../modules/database");
+const file = require("../../modules/file");
+const { isOrdered } = require("../../modules/sort");
 const { currentDateTime, dateStringToSentence } = require("../../modules/date");
 
 function poll(req, res) {
@@ -248,7 +249,52 @@ function removeQuestion(req, res) {
 }
 
 function updatePoll(req, res) {
-	
+	const data = req.body;
+	const creatorname = data.creatorname;
+	const pollId = data.pollId;
+	const order = data.order.map(function (item) {
+		return parseInt(item);
+	});
+
+	// find poll
+	const allPolls = file.readJSON("data/polls.json");
+	const poll = allPolls.find(function (poll) {
+		return poll.pollId === pollId;
+	});
+	const pollIndex = allPolls.findIndex(function (poll) {
+		return poll.pollId === pollId;
+	});
+
+	if (!isOrdered(order)) {
+		// change order of questions
+		poll.questions = poll.questions.map(function (question, index) {
+			question.order = order[index];
+			return question;
+		}).sort(function (a, b) {
+			return a.order - b.order;
+		}).map(function (question, index) {
+			question.index = (index + 1);
+			delete question.order;
+			return question;
+		});
+	} else {
+		console.log(currentDateTime() + ": No changes");
+		return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
+	}
+
+	// update modified date & question count
+	const date = currentDateTime();
+	poll.modified = date;
+	poll.modifiedSentence = dateStringToSentence(date);
+
+	// replace poll
+	allPolls.splice(pollIndex, 1, poll);
+
+	// update polls.json
+	db.add("polls", allPolls);
+
+	// redirect to edit poll
+	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 }
 
 function updateQuestion(req, res) {
