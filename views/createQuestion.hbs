@@ -2,12 +2,12 @@
 <main id="content">
 <h1>Maak nieuwe vraag</h1>
 <form action="/vraag-toevoegen" method="POST">
-	<label>Vraag: <input type="text" name="title"></label>
+	<label>Vraag: <input type="text" name="title" maxlength="56"></label>
 	<fieldset>
 		<legend>Antwoorden</legend>
 		<ol>
 			{{#each options}}
-			<li><label>Optie {{this}}: <input type="text" name="options"></label></li>
+			<li><label>Optie {{this}}: <input type="text" name="options" maxlength="24"></label></li>
 			{{/each}}
 		</ol>
 		{{#if nextOption}}

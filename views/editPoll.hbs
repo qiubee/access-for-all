@@ -3,14 +3,14 @@
 	<h1>Poll <span>{{pollname}}</span> bewerken</h1>
 	<form action="/update-poll" method="POST">
 	<div>
-		<label><span>Titel: </span><input type="text" name="title" value="{{pollname}}"></label>
+		<label><span>Titel: </span><input type="text" name="title" value="{{pollname}}" maxlength="56"></label>
 	</div>
 	<fieldset>
 		<legend>Vragen van de {{pollname}} poll</legend>
 	{{#if questions}}
 	<ol>
 		{{#each questions}}
-		<li><label>Vraag <span>nummer: </span><input type="number" name="order" value="{{index}}" min="1" max="10"></label>
+		<li><label>Vraag <span>nummer: </span><input type="number" name="order" value="{{index}}" min="1" max="5"></label>
 		<section>
 		<h3>{{title}}</h3>
 		<p>De mogelijke antwoorden:</p>

@@ -2,8 +2,8 @@
 <main id="content">
 	<h1>Nieuw profiel maken</h1>
 	<form action="/create" method="POST">
-		<label>Naam <input name="name" type="text"></label>
-		<label>Gebruikersnaam <input name="username" type="text"></label>
+		<label>Naam <input name="name" type="text" maxlength="16"></label>
+		<label>Gebruikersnaam <input name="username" type="text" maxlength="14"></label>
 		<label>Wachtwoord <input name="password" type="password"></label>
 		<input type="submit" value="Profiel aanmaken">
 	</form>

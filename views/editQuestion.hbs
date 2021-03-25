@@ -2,12 +2,12 @@
 <main id="content">
 	<h1>Vraag <span>{{questionNumber}}</span> bewerken</h1>
 	<form action="/update-vraag" method="POST">
-	<label>Vraag: <input type="text" name="title" value="{{questionTitle}}"></label>
+	<label>Vraag: <input type="text" name="title" value="{{questionTitle}}" maxlength="56"></label>
 	<fieldset>
 		<legend>Antwoorden</legend>
 		<ol>
 			{{#each options}}
-			<li><label>Optie {{index}}: <input type="text" name="answers" value="{{text}}"></label></li>
+			<li><label>Optie {{index}}: <input type="text" name="answers" value="{{text}}" maxlength="24"></label></li>
 			{{/each}}
 		</ol>
 		{{#if nextOption}}

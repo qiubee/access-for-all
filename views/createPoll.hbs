@@ -2,7 +2,7 @@
 <main id="content">
 	<h1>Maak een nieuwe poll</h1>
 	<form action="/maak-poll" method="POST">
-	<label>Titel poll: <input type="text" name="title"></label>
+	<label>Titel poll: <input type="text" name="title" maxlength="56"></label>
 	<fieldset>
 		<legend>Kies de zichtbaarheid van de poll</legend>
 		<label><input type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
