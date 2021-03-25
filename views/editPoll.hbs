@@ -1,27 +1,50 @@
 {{> creatorHeader}}
 <main id="content">
-	<h1>Poll bewerken</h1>
-	<form action="/bewerk-poll" method="POST">
+	<h1>Poll <span>{{pollname}}</span> bewerken</h1>
+	<form action="/update-poll" method="POST">
 	<div>
 		<label><span>Titel: </span><input type="text" name="title" value="{{pollname}}"></label>
 	</div>
+	<fieldset>
+		<legend>Vragen van de {{pollname}} poll</legend>
 	{{#if questions}}
 	<ol>
-		{{#each question}}
-		<li><label>Vraag <input type="number" name="order" value="{{index}}" min="1" max="10"></label>: {{question}} 
-		<p><span>Vraag </span><a href="vraag-{{index}}">bewerken</a><span> of </span><a href="vraag-verwijderen">verwijderen</a><span>.</span></p>
+		{{#each questions}}
+		<li><label>Vraag <span>nummer: </span><input type="number" name="order" value="{{index}}" min="1" max="10"></label>
+		<section>
+		<h3>{{title}}</h3>
+		<p>De mogelijke antwoorden:</p>
+		<ul>
+			{{#each options}}
+			<li>{{text}}</li>
+			{{/each}}
+		</ul>
+		</section>
+		<p><span>Vraag <em>{{title}}</em> </span><a href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
 		</li>
 		{{/each}}
 	</ol>
+	</fieldset>
 	{{/if}}
+	{{#if questionLimit}}
+	<p>Je zit aan het maximum aan vragen</p>
+	{{else}}
 	<a href="vraag-toevoegen">Maak nieuwe vraag</a>
+	{{/if}}
 	<fieldset>
-		<legend>Instellingen<span> poll</span></legend>	
-		{{#if timerAdvanced}}
-		<a href="tijd-instellen">Standaard tijd instellen</a>
+		<legend>Instellingen<span> {{pollname}} poll</span></legend>	
+		{{#if timeStandardSet}}
+		<label>De standaard tijd voor elke vraag:
+			<select name="timeStandard">
+				{{#each timeStandardOptions}}
+					<option value="{{seconds}}" {{selected}}>{{text}}</option>
+				{{/each}}
+			</select>
+		</label>
 		{{else}}
-		<label>Standaard tijd voor elke vraag:
-			<select name="timer">
+		<label>Standaard tijd per vraag instellen <input type="checkbox" name="setTimeStandard"></label>
+		<label>Kies de standaard tijd voor elke vraag:
+			<select name="newTimeStandard">
 				<option value="60" selected>1 minuut</option>
 				<option value="120">2 minuten</option>
 				<option value="180">3 minuten</option>
@@ -31,13 +54,15 @@
 		</label>
 		{{/if}}
 		<fieldset>
-			<legend>Zichtbaarheid<span> poll</span></legend>
+			<legend>Zichtbaarheid<span> {{pollname}} poll</span></legend>
 			<label><input type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
 			<label><input type="radio" name="visibility" value="limited">Besloten <span>(alleen voor leden van jouw groep)</span>
 			</label>
 			<label><input checked type="radio" name="visibility" value="private">Priv&eacute; (alleen zichtbaar voor jou)</label>
 		</fieldset>
 	</fieldset>
+	<input type="hidden" name="pollId" value="{{pollId}}">
+	<input type="hidden" name="creatorname" value="{{creatorname}}">
 	<div>
 		<input type="submit" value="Wijzigingen opslaan">
 	</div>
