@@ -4,6 +4,7 @@ const router = require("express").Router();
 const index = require("./controllers/index");
 const { authenticate, authorized } = require("./controllers/authentication");
 const poll = require("./controllers/poll");
+const profile = require("./controllers/profile");
 const creator = require("./controllers/creator");
 const user = require("./controllers/user");
 const login = require("./controllers/login");
@@ -24,6 +25,7 @@ router.get("/", index)
 	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/vraag-:questionNumber([0-9]{1,2})-bewerken:options?", authorized, poll.editQuestion)
 	.get("/poll/:pollId([0-9]{8,})/:user?", poll.poll)
 	.post("/login", authenticate)
+	.post("/profiel-aanmaken", profile.add)
 	.post("/maak-poll", poll.add)
 	.post("/vraag-toevoegen", poll.addQuestion)
 	.post("/update-poll", poll.update)
