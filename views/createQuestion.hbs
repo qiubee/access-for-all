@@ -16,14 +16,20 @@
 	</fieldset>
 	<label>Tijd om op vraag te antwoorden:
 		<select name="timer">
-			<option value="60" selected>1 minuut</option>
-			<option value="120">2 minuten</option>
-			<option value="180">3 minuten</option>
-			<option value="240">4 minuten</option>
-			<option value="300">5 minuten</option>
+			{{#if timeStandardSet}}
+				{{#each timeStandardOptions}}
+				<option value="{{seconds}}" {{selected}}>{{text}}</option>
+				{{/each}}
+			{{else}}
+				<option value="60" selected>1 minuut</option>
+				<option value="120">2 minuten</option>
+				<option value="180">3 minuten</option>
+				<option value="240">4 minuten</option>
+				<option value="300">5 minuten</option>
+			{{/if}}
 		</select>
 	</label>
-	<label><input type="checkbox" name="inactive"> Vraag inactief maken</label>
+	<label><input type="checkbox" name="hidden"> Vraag verbergen</label>
 	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creator" value="{{creatorname}}">
 	<div>
