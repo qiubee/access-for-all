@@ -40,6 +40,15 @@ function authenticate(req, res) {
 }
 
 function authorized(req, res, next) {
+	const data = req.params;
+	// const allUsers = file.readJSON("data/uses.json");
+	// const users = allUsers.user;
+	// const creators = allUsers.creator;
+
+	if (data.creatorname === "undefined" || data.creatorname === "null") {
+		res.status(401);
+		res.redirect("/login");
+	}
 	// console.log(currentDateTime() + ": Verifying user...");
 	// console.log(req.header('Authorization'));
 	// const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
