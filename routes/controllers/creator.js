@@ -17,7 +17,6 @@ function creatorOverview(req, res) {
 		title: `${creatorname} (Creator) · Polly`,
 		creatorname: creatorname,
 		myPolls: creatorPolls,
-		polls: creatorPolls
 	});
 }
 
