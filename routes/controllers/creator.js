@@ -2,8 +2,7 @@ const file = require("../../modules/file");
 
 function creators(req, res) {
 	res.render("creators", {
-		title: "Word Creator · Polly",
-		creatorSection: true
+		title: "Word Creator · Polly"
 	});
 }
 
@@ -21,7 +20,9 @@ function creatorOverview(req, res) {
 }
 
 function createCreator(req, res) {
-	const headers = req.headers;
+	res.render("createCreator", {
+		title: "Creator profiel aanmaken · Polly"
+	});
 }
 
 exports.infoPage = creators;
