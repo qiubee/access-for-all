@@ -1,5 +1,6 @@
 const { verifyUser } = require("../../modules/verification");
 const { currentDateTime } = require("../../modules/date");
+const file = require("../../modules/file");
 
 
 function authenticate(req, res) {
@@ -40,22 +41,55 @@ function authenticate(req, res) {
 }
 
 function authorized(req, res, next) {
+	console.log(currentDateTime() + ": Verifying user...");
+	const verifiedLog = () => console.log(currentDateTime() + ": User verified.");
+	const failedLog = () => console.log(currentDateTime() + ": User not authenticated and redirected to login");
+
 	const data = req.params;
-	// const allUsers = file.readJSON("data/uses.json");
-	// const users = allUsers.user;
-	// const creators = allUsers.creator;
 
 	if (data.creatorname === "undefined" || data.creatorname === "null") {
 		res.status(401);
 		res.redirect("/login");
 	}
-	// console.log(currentDateTime() + ": Verifying user...");
+
+	const allUsers = file.readJSON("data/users.json");
+
+	if (data.username) {
+		const users = allUsers.user;
+		const userinDB = users.find(function (user) {
+			return user.username === data.username;
+		}) ? true : false;
+		if (userinDB) {
+			verifiedLog();
+			next();
+		} else {
+			failedLog();
+			res.status(401);
+			res.redirect("/login");
+		}
+	} else if (data.creatorname) {
+		console.log(data.creatorname);
+		const creators = allUsers.creator;
+		const userinDB = creators.find(function (creator) {
+			return creator.username === data.creatorname;
+		}) ? true : false;
+		if (userinDB) {
+			verifiedLog();
+			next();
+		} else {
+			failedLog();
+			res.status(401);
+			res.redirect("/login");
+		}
+	} else {
+		failedLog();
+		res.status(401);
+		res.redirect("/login");
+	}
 	// console.log(req.header('Authorization'));
 	// const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
   	// const login = Buffer.from(b64auth, "base64").toString().split(":");
 	// console.log(b64auth, login);
-
-	next();
 }
 
 exports.authenticate = authenticate;
