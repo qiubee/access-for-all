@@ -68,7 +68,6 @@ function authorized(req, res, next) {
 			res.redirect("/login");
 		}
 	} else if (data.creatorname) {
-		console.log(data.creatorname);
 		const creators = allUsers.creator;
 		const userinDB = creators.find(function (creator) {
 			return creator.username === data.creatorname;
@@ -86,10 +85,6 @@ function authorized(req, res, next) {
 		res.status(401);
 		res.redirect("/login");
 	}
-	// console.log(req.header('Authorization'));
-	// const b64auth = (req.headers.authorization || "").split(" ")[1] || "";
-  	// const login = Buffer.from(b64auth, "base64").toString().split(":");
-	// console.log(b64auth, login);
 }
 
 exports.authenticate = authenticate;
