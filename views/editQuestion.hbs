@@ -1,32 +1,38 @@
 {{> creatorHeader}}
 <main id="content">
-	<h1>Vraag bewerken</h1>
-	<form action="/edit-question" method="POST">
-	<label>Vraag: <input type="text" name="title"></label>
+	<h1>Vraag <span>{{questionNumber}}</span> bewerken</h1>
+	<form action="/update-vraag" method="POST">
+	<label>Vraag: <input type="text" name="title" value="{{questionTitle}}"></label>
 	<fieldset>
 		<legend>Antwoorden</legend>
 		<ol>
 			{{#each options}}
-			<li><label>Optie {{this}}: <input type="text" name="options"></label></li>
+			<li><label>Optie {{index}}: <input type="text" name="answers" value="{{text}}"></label></li>
 			{{/each}}
 		</ol>
 		{{#if nextOption}}
-			<a href="/c/{{creatorname}}/poll/{{pollId}}/vraag-toevoegen{{optionCount}}">Antwoord toevoegen</a>
+			<a href="/c/{{creatorname}}/poll/{{pollId}}/vraag-{{questionNumber}}-bewerken{{optionCount}}">Antwoord toevoegen</a>
 		{{/if}}
 	</fieldset>
 	<label>Tijd om op vraag te antwoorden:
 		<select name="timer">
-			<option value="60" selected>1 minuut</option>
-			<option value="120">2 minuten</option>
-			<option value="180">3 minuten</option>
-			<option value="240">4 minuten</option>
-			<option value="300">5 minuten</option>
+			{{#if timeStandardSet}}
+				{{#each timeStandardOptions}}
+				<option value="{{seconds}}" {{selected}}>{{text}}</option>
+				{{/each}}
+			{{else}}
+				<option value="60" selected>1 minuut</option>
+				<option value="120">2 minuten</option>
+				<option value="180">3 minuten</option>
+				<option value="240">4 minuten</option>
+				<option value="300">5 minuten</option>
+			{{/if}}
 		</select>
 	</label>
-	<label><input type="checkbox" name="inactive"> Vraag inactief maken</label>
+	<label><input type="checkbox" name="hidden"> Vraag verbergen</label>
 	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creator" value="{{creatorname}}">
 	<div>
-		<input type="submit" value="Vraag toevoegen">
+		<input type="submit" value="Wijzigingen opslaan">
 	</div>
 </main>
