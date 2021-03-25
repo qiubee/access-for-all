@@ -1,7 +1,7 @@
-const { readFromFile } = require("./file");
+const { readJSON } = require("./file");
 
 function verifyUser(username, password, type) {
-	const users = JSON.parse(readFromFile("data/users.json"));
+	const users = readJSON("data/users.json");
 	
 	if (type === "creator") {
 		const creator = lookupUser(users.creator, username, password);
