@@ -17,15 +17,16 @@ router.get("/", index)
 	.get("/creator-profiel-aanmaken", creator.create)
 	.get("/c/:creatorname([a-zA-Z]{2,10})", authorized, creator.overview)
 	.get("/u/:username([a-zA-Z]{3,16})", authorized, user.overview)
-	.get("/c/:creatorname([a-zA-Z]{2,10})/maak-poll", authorized, poll.creator)
-	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/edit", authorized, poll.editor)
+	.get("/c/:creatorname([a-zA-Z]{2,10})/maak-poll", authorized, poll.create)
+	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/edit", authorized, poll.edit)
 	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/vraag-toevoegen:options?", authorized, poll.createQuestion)
-	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/vraag-:question([0-9]{1,2})", authorized, poll.editQuestion)
-	.get("/poll/:pollId([0-9]{8,})", poll.poll)
+	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/vraag-:questionNumber([0-9]{1,2})-verwijderen",authorized, poll.removeQuestion)
+	.get("/c/:creatorname([a-zA-Z]{2,10})/poll/:pollId([0-9]{8,})/vraag-:questionNumber([0-9]{1,2})-bewerken:options?", authorized, poll.editQuestion)
+	.get("/poll/:pollId([0-9]{8,})/:user?", poll.poll)
 	.post("/login", authenticate)
 	.post("/maak-poll", poll.add)
 	.post("/vraag-toevoegen", poll.addQuestion)
-	.post("/bewerk-poll", poll.edit)
-	.post("/bewerk-vraag", poll.editQuestion);
+	.post("/update-poll", poll.update)
+	.post("/update-vraag", poll.updateQuestion);
 
 module.exports = router;
