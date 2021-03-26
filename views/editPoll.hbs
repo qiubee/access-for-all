@@ -20,16 +20,19 @@
 				{{/each}}
 			</ul>
 			<div>
+				<h4>Kenmerken</h4>
+				<ul>
 			{{#if hidden}}
-				<label>Vraag onzichtbaar <input type="checkbox" name="hidden" disabled checked></label>
+				<li>Vraag is niet zichtbaar tijdens poll</li>
 			{{else}}
-				<label>Vraag onzichtbaar <input type="checkbox" name="hidden" disabled ></label>
+				<li>Vraag is zichtbaar</li>
 			{{/if}}
 			{{#if showresults}}
-				<label>Toon resultaten <input type="checkbox" name="showresults" disabled checked></label>
+				<li>Resultaten worden weergegeven</li>
 			{{else}}
-				<label>Toon resultaten <input type="checkbox" name="showresults" disabled></label>
+				<li>Resultaten zijn priv&eacute;</li>
 			{{/if}}
+			</ul>
 			</div>
 			<p><span>Vraag <em>{{title}}</em> </span><a href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
 			</li>
