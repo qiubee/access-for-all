@@ -52,20 +52,19 @@
 						{{/each}}
 					</ol>
 				{{else}}
-				<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Voeg een vraag toe</a><span>.</span></p>
+				<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
 				{{/if}}
 				<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
-				{{#if questions}}
 				<ul>
 					<li>
-						<a href="/c/{{creator}}/poll/{{pollId}}/edit">Poll bewerken</a>
+						<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
 					</li>
 					<li>
-						<a href="/poll/{{pollId}}">Poll publiceren</a>
+						<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
 					</li>
 				</ul>
-				{{else}}
-					<a href="/c/{{creator}}/poll/{{pollId}}/edit">Poll bewerken</a>
+				{{#if questions}}
+					<a href="/poll/{{pollId}}"><span>Poll </span>publiceren</a>
 				{{/if}}
 			</article>
 		{{/each}}
