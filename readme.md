@@ -39,7 +39,6 @@ List of devices and browsers used for testing:
 * [Mobile](#mobile)
 	* [iOS Safari 9 (iPod Touch)](#ios-safari-9)
 	* [Chrome (LG)](#chrome)
-* Screenreader
 
 ## Miscellaneous
 
