@@ -54,6 +54,7 @@ function questionCreator(req, res) {
 	// get time standard information
 	const timeStandard = getStandardTimeOptions(req.params.pollId);
 
+	console.log(timeStandard)
 	// add options for question if selected
 	const optionCount = parseInt(req.params.options) || 2;
 	let options = [];
@@ -327,7 +328,7 @@ function getStandardTimeOptions(pollId, pollData=false) {
 	let timeStandard = [];
 	if (!pollData) {
 		const allPolls = file.readJSON("data/polls.json");
-		data = allPolls.find(function (poll) {
+		timeStandard = allPolls.find(function (poll) {
 			return poll.pollId === pollId;
 		}).timeStandard;
 	} else {
