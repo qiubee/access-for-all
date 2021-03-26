@@ -8,22 +8,17 @@ function addUser(req, res) {
 	const type = credentials.type;
 	const allUsers = file.readJSON("/data/users.json");
 
-	let pageTitle = "";
-	let duplicate = true;
-	if (type === "user") {
-		pageTitle = "Maak profiel · Polly";
-		const users = allUsers.user;
-		duplicate = users.find(function (user) {
-			return user.username === username;
-		}) ? true : false;
-	} else if (type === "creator") {
-		pageTitle = "Creator profiel aanmaken · Polly";
-		const creators = allUsers.creator;
-		duplicate = creators.find(function (creator) {
-			return creator.username === username;
-		}) ? true : false;
-	}
-	
+	const pageTitle = type === "user" ? "Maak profiel · Polly" : "Creator profiel aanmaken · Polly";
+
+	// check for duplicate username
+	const userInDB = allUsers.user.find(function (user) {
+		return user.username === username;
+	}) ? true : false;
+	const creatorInDB = allUsers.creator.find(function (creator) {
+		return creator.username === username;
+	}) ? true : false;
+	const duplicate = userInDB ? true : creatorInDB ? true : false;
+
 	// validation
 	if (duplicate) {
 		return res.render("createProfile", {
@@ -49,8 +44,7 @@ function addUser(req, res) {
 		type: credentials.type
 	};
 
-	console.log(newUser);
-
+	// add user to database & go to user page
 	if (type === "user") {
 		const users = allUsers.user;
 		users.push(newUser);
