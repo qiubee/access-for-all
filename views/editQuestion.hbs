@@ -1,6 +1,7 @@
 {{> creatorHeader}}
 <main id="content">
 	<h1>Vraag <span>{{questionNumber}}</span> bewerken</h1>
+	<a href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
 	<form action="/update-vraag" method="POST">
 	<label>Vraag: <input type="text" name="title" value="{{questionTitle}}" maxlength="56"></label>
 	<fieldset>
@@ -45,4 +46,6 @@
 	<div>
 		<input type="submit" value="Wijzigingen opslaan">
 	</div>
+	</form>
+	<a href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
 </main>
