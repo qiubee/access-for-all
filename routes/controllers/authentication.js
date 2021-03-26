@@ -48,8 +48,9 @@ function authorized(req, res, next) {
 	const data = req.params;
 
 	if (data.creatorname === "undefined" || data.creatorname === "null") {
+		failedLog();
 		res.status(401);
-		res.redirect("/login");
+		return res.redirect("/login");
 	}
 
 	const allUsers = file.readJSON("data/users.json");
