@@ -35,6 +35,11 @@ function pollEditor(req, res) {
 	});
 
 	const timeStandard = getStandardTimeOptions(req.params.pollId);
+	
+	const visibilityOpen = poll.visibility === "open" ? true : false;
+	const visibilityLimited = poll.visibility === "besloten" ? true : false;
+	const visibilityPrivate = poll.visibility === "privé" ? true : false;
+
 
 	res.render("editPoll", {
 		title: `Poll bewerken · ${creatorname} | Polly`,
@@ -44,7 +49,10 @@ function pollEditor(req, res) {
 		timeStandardSet: timeStandard.checked,
 		timeStandardOptions: timeStandard.options,
 		questions: poll.questionCount >= 1 ? poll.questions : null,
-		questionLimit: poll.questionCount > 5 ? true : false
+		questionLimit: poll.questionCount > 5 ? true : false,
+		open: visibilityOpen,
+		limited: visibilityLimited,
+		private: visibilityPrivate
 	});
 }
 
@@ -160,16 +168,17 @@ function addPoll(req, res) {
 	newPoll.modifiedSentence = dateStringToSentence(newPoll.modified);
 	newPoll.createdSentence = dateStringToSentence(newPoll.created);
 
-
 	delete newPoll.timePerQuestion;
 	delete newPoll.creatorname;
-
 
 	// read polls.json & add new poll
 	const allPolls = file.readJSON("data/polls.json");
 	allPolls.push(newPoll);
+
 	// add to polls.json
 	db.add("polls", allPolls);
+
+	console.log(currentDateTime(), `: Added new poll (${pollId})`);
 
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
@@ -210,6 +219,8 @@ function addQuestion(req, res) {
 	// update polls.json
 	db.add("polls", allPolls);
 
+	console.log(currentDateTime(), ": Added question to poll", pollId);
+
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 }
@@ -227,14 +238,14 @@ function removeQuestion(req, res) {
 
 			// remove question from array
 			questions.splice((data.questionNumber - 1), 1);
-			console.log("removed question " + data.questionNumber);
+			console.log(currentDateTime(), ": Removed question from poll", pollId);
 
 			// reindex questions
 			questions.map(function (question, index) {
 				question.index = (index + 1);
 				return question;
 			});
-			console.log("reindexed");
+			console.log(currentDateTime(), ": Reindexed questions from poll", pollId);
 
 			// update modified date & question count
 			const date = currentDateTime();
@@ -269,8 +280,8 @@ function updatePoll(req, res) {
 	// update poll questions
 	if (data.savequestions) {
 		// check if questions are greater than 1
-		if (data.order === "string") {
-			console.log(currentDateTime() + ": No changes");
+		if (typeof data.order === "string") {
+			console.log(currentDateTime() + `: No changes to poll ${pollId} and redirected`);
 			return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 		}
 
@@ -292,7 +303,7 @@ function updatePoll(req, res) {
 				return question;
 			});
 		} else {
-			console.log(currentDateTime() + ": No changes");
+			console.log(currentDateTime() + `: No changes to poll ${pollId} and redirected`);
 			return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 		}
 	}
@@ -327,6 +338,8 @@ function updatePoll(req, res) {
 
 	// update polls.json
 	db.add("polls", allPolls);
+
+	console.log(currentDateTime() + ": Updated poll", pollId);
 
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
@@ -401,7 +414,6 @@ function updateQuestion(req, res) {
 		question.showresults = showResults;
 	}
 	
-
 	// update modified date
 	const date = currentDateTime();
 	poll.modified = date;
@@ -418,6 +430,26 @@ function updateQuestion(req, res) {
 
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
+}
+
+function removePoll(req, res) {
+	const creatorname = req.params.creatorname;
+	const pollId = req.params.pollId;
+	const allPolls = file.readJSON("data/polls.json");
+
+	// find poll
+	const pollIndex = allPolls.findIndex(function (poll) {
+		return poll.pollId === pollId;
+	});
+
+	// remove poll
+	allPolls.splice(pollIndex, 1);
+
+	// update polls.json
+	db.add("polls", allPolls);
+
+	// redirect to creator page
+	res.redirect(`/c/${creatorname}`);
 }
 
 // data functions
@@ -478,3 +510,4 @@ exports.addQuestion = addQuestion;
 exports.removeQuestion = removeQuestion;
 exports.update = updatePoll;
 exports.updateQuestion = updateQuestion;
+exports.remove = removePoll;
