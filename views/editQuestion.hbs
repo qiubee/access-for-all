@@ -29,9 +29,19 @@
 			{{/if}}
 		</select>
 	</label>
-	<label><input type="checkbox" name="hidden"> Vraag verbergen</label>
+	{{#if hidden}}
+		<label>Vraag verbergen <input type="checkbox" name="hidden" checked></label>
+	{{else}}
+		<label>Vraag verbergen <input type="checkbox" name="hidden"></label>
+	{{/if}}
+	{{#if showresults}}
+		<label>Resultaten direct tonen <input type="checkbox" name="showresults" checked></label>
+	{{else}}
+		<label>Resultaten direct tonen <input type="checkbox" name="showresults"></label>
+	{{/if}}
 	<input type="hidden" name="pollId" value="{{pollId}}">
-	<input type="hidden" name="creator" value="{{creatorname}}">
+	<input type="hidden" name="index" value="{{questionNumber}}">
+	<input type="hidden" name="creatorname" value="{{creatorname}}">
 	<div>
 		<input type="submit" value="Wijzigingen opslaan">
 	</div>
