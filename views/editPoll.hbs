@@ -5,39 +5,56 @@
 	<div>
 		<label><span>Titel: </span><input type="text" name="title" value="{{pollname}}" maxlength="56"></label>
 	</div>
+	{{#if questions}}
 	<fieldset>
 		<legend>Vragen van de {{pollname}} poll</legend>
-	{{#if questions}}
-	<ol>
-		{{#each questions}}
-		<li><label>Vraag <span>nummer: </span><input type="number" name="order" value="{{index}}" min="1" max="5"></label>
-		<section>
-		<h3>{{title}}</h3>
-		<p>De mogelijke antwoorden:</p>
-		<ul>
-			{{#each options}}
-			<li>{{text}}</li>
+			<ol>
+			{{#each questions}}
+			<li><label>Vraag <span>nummer: </span><input type="number" name="order" value="{{index}}" min="1" max="5"></label>
+			<section>
+			<h3>{{title}}</h3>
+			<p>De mogelijke antwoorden:</p>
+			<ul>
+				{{#each options}}
+				<li>{{text}}</li>
+				{{/each}}
+			</ul>
+			<div>
+			{{#if hidden}}
+				<label>Vraag onzichtbaar <input type="checkbox" name="hidden" disabled checked></label>
+			{{else}}
+				<label>Vraag onzichtbaar <input type="checkbox" name="hidden" disabled ></label>
+			{{/if}}
+			{{#if showresults}}
+				<label>Toon resultaten <input type="checkbox" name="showresults" disabled checked></label>
+			{{else}}
+				<label>Toon resultaten <input type="checkbox" name="showresults" disabled></label>
+			{{/if}}
+			</div>
+			<p><span>Vraag <em>{{title}}</em> </span><a href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
+			</li>
+			</section>
 			{{/each}}
-		</ul>
-		<label>Vraag onzichtbaar <input type="checkbox" name="hidden" {{hidden}}></label>
-		<label>Toon resultaten <input type="checkbox" name="showresults" {{showResult}}></label>
-		<p><span>Vraag <em>{{title}}</em> </span><a href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
-		</li>
-		</section>
-		{{/each}}
-	</ol>
-	</fieldset>
-	{{/if}}
-	{{#if questionLimit}}
-	<p>Je zit aan het maximum aan vragen</p>
+			</ol>
+			{{#if questionLimit}}
+				<p>Je zit aan het maximum aan vragen</p>
+			{{else}}
+				<a href="vraag-toevoegen">Maak nieuwe vraag</a>
+			{{/if}}
+			<div>
+				<input type="submit" name="savequestions" value="Wijzigingen opslaan">
+			</div>
+		</fieldset>
 	{{else}}
-	<a href="vraag-toevoegen">Maak nieuwe vraag</a>
+		<p>Je hebt nog geen vragen voor de poll.</p>
+		<a href="vraag-toevoegen">Maak nieuwe vraag</a>
 	{{/if}}
+	
 	<fieldset>
 		<legend>Instellingen<span> {{pollname}} poll</span></legend>	
 		{{#if timeStandardSet}}
 		<label>De standaard tijd voor elke vraag:
-			<select name="timeStandard">
+			<select name="newTimeStandard">
 				{{#each timeStandardOptions}}
 					<option value="{{seconds}}" {{selected}}>{{text}}</option>
 				{{/each}}
@@ -58,15 +75,15 @@
 		<fieldset>
 			<legend>Zichtbaarheid<span> {{pollname}} poll</span></legend>
 			<label><input type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
-			<label><input type="radio" name="visibility" value="limited">Besloten <span>(alleen voor leden van jouw groep)</span>
+			<label><input type="radio" name="visibility" value="besloten">Besloten <span>(alleen voor leden van jouw groep)</span>
 			</label>
-			<label><input checked type="radio" name="visibility" value="private">Priv&eacute; (alleen zichtbaar voor jou)</label>
+			<label><input checked type="radio" name="visibility" value="privé">Priv&eacute; (alleen zichtbaar voor jou)</label>
 		</fieldset>
+		<div>
+		<input type="submit" name="savesettings" value="Instellingen opslaan">
+		</div>
 	</fieldset>
 	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creatorname" value="{{creatorname}}">
-	<div>
-		<input type="submit" value="Wijzigingen opslaan">
-	</div>
 	</form>
 </main>
