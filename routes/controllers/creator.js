@@ -11,7 +11,13 @@ function creatorOverview(req, res) {
 	const allPolls = file.readJSON("/data/polls.json");
 	const creatorPolls = allPolls.filter(function (poll) {
 		return poll.creator === creatorname;
+	}).map(function (poll) {
+		if (poll.questionCount === 1) {
+			poll.singleQuestion = true;
+		}
+		return poll;
 	});
+
 	res.render("creatorPage", {
 		title: `${creatorname} (Creator) · Polly`,
 		creatorname: creatorname,
