@@ -12,6 +12,29 @@ function poll(req, res) {
 	});
 }
 
+function startPoll(req, res) {
+	const creatorname = req.params.creatorname;
+	const pollId = req.params.pollId;
+
+	const allPolls = file.readJSON("data/polls.json");
+	const updatedPolls = allPolls.map(function (poll) {
+		if (poll.pollId === pollId) {
+			poll.active = true;
+			poll.started = currentDateTime();
+			poll.currentQuestion = 1;
+		}
+		return poll;
+	});
+	
+	// update polls.json
+	db.add("polls", updatedPolls);
+
+	console.log(currentDateTime(), `: Poll ${pollId} is now active`);
+
+	// redirect to edit poll
+	res.redirect(`/c/${creatorname}`);
+}
+
 function searchPolls(req, res) {
 	res.render("searchPolls", {
 		title: "Overzicht huidige polls · Polly"
@@ -505,6 +528,7 @@ exports.create = pollCreator;
 exports.edit = pollEditor;
 exports.createQuestion = questionCreator;
 exports.editQuestion = questionEditor;
+exports.start = startPoll;
 exports.add = addPoll;
 exports.addQuestion = addQuestion;
 exports.removeQuestion = removeQuestion;
