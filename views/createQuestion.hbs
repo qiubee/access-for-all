@@ -1,6 +1,7 @@
 {{> creatorHeader}}
 <main id="content">
 <h1>Maak nieuwe vraag</h1>
+<a href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
 <form action="/vraag-toevoegen" method="POST">
 	<label>Vraag: <input type="text" name="title" maxlength="56"></label>
 	<fieldset>
@@ -37,4 +38,5 @@
 		<input type="submit" value="Vraag toevoegen">
 	</div>
 </form>
+<a href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
 </main>
