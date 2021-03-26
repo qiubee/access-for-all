@@ -54,7 +54,6 @@ function questionCreator(req, res) {
 	// get time standard information
 	const timeStandard = getStandardTimeOptions(req.params.pollId);
 
-	console.log(timeStandard)
 	// add options for question if selected
 	const optionCount = parseInt(req.params.options) || 2;
 	let options = [];
@@ -63,7 +62,7 @@ function questionCreator(req, res) {
 	}
 	// redirect to page with 5 options if options exceed 5
 	if (optionCount > 5) {
-		res.redirect(`/c/${data.creatorname}/poll/${data.pollId}/vraag-toevoegen5`);
+		return res.redirect(`/c/${data.creatorname}/poll/${data.pollId}/vraag-toevoegen5`);
 	}
 	res.render("createQuestion", {
 		title: `Vraag toevoegen · ${data.creatorname} | Polly`,
@@ -117,7 +116,7 @@ function questionEditor(req, res) {
 
 	// redirect to page with 5 options if options exceed 5
 	if (optionCount > 5) {
-		res.redirect(`/c/${creatorname}/poll/${pollId}/vraag-${questionNumber}-bewerken5`);
+		return res.redirect(`/c/${creatorname}/poll/${pollId}/vraag-${questionNumber}-bewerken5`);
 	}
 
 	res.render("editQuestion", {
@@ -129,6 +128,8 @@ function questionEditor(req, res) {
 		optionCount: (optionCount + 1),
 		nextOption: optionCount > 4 ? false : true,
 		options: options,
+		hidden: question.hidden,
+		showresults: question.showresults,
 		timeStandardSet: timeStandard.checked,
 		timeStandardOptions: timeStandard.options
 	});
@@ -189,12 +190,13 @@ function addQuestion(req, res) {
 	const allPolls = file.readJSON("data/polls.json");
 	allPolls.map(function (poll) {
 		if (poll.pollId === pollId) {
-			
 			const question = {
 				index: (poll.questions.length + 1),
 				title: req.body.title,
 				options: options,
-				hidden: req.body.hidden ? true : false
+				hidden: req.body.hidden ? true : false,
+				showresults: req.body.showresults ? true : false,
+				timer: parseInt(req.body.timer)
 			};
 			poll.questions.push(question);
 			poll.questionCount = poll.questions.length;
@@ -208,6 +210,7 @@ function addQuestion(req, res) {
 	// update polls.json
 	db.add("polls", allPolls);
 
+	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 }
 
@@ -253,10 +256,7 @@ function updatePoll(req, res) {
 	const data = req.body;
 	const creatorname = data.creatorname;
 	const pollId = data.pollId;
-	const order = data.order.map(function (item) {
-		return parseInt(item);
-	});
-
+	
 	// find poll
 	const allPolls = file.readJSON("data/polls.json");
 	const poll = allPolls.find(function (poll) {
@@ -266,24 +266,58 @@ function updatePoll(req, res) {
 		return poll.pollId === pollId;
 	});
 
-	if (!isOrdered(order)) {
-		// change order of questions
-		poll.questions = poll.questions.map(function (question, index) {
-			question.order = order[index];
-			return question;
-		}).sort(function (a, b) {
-			return a.order - b.order;
-		}).map(function (question, index) {
-			question.index = (index + 1);
-			delete question.order;
-			return question;
+	// update poll questions
+	if (data.savequestions) {
+		// check if questions are greater than 1
+		if (data.order === "string") {
+			console.log(currentDateTime() + ": No changes");
+			return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
+		}
+
+		const order = data.order.map(function (item) {
+			return parseInt(item);
 		});
-	} else {
-		console.log(currentDateTime() + ": No changes");
-		return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
+
+		// check if unordered
+		if (!isOrdered(order)) {
+			// order of questions
+			poll.questions = poll.questions.map(function (question, index) {
+				question.order = order[index];
+				return question;
+			}).sort(function (a, b) {
+				return a.order - b.order;
+			}).map(function (question, index) {
+				question.index = index + 1;
+				delete question.order;
+				return question;
+			});
+		} else {
+			console.log(currentDateTime() + ": No changes");
+			return res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
+		}
+	}
+	
+	// update poll settings
+	if (data.savesettings) {
+		// set time standard for all questions
+		if (data.setTimeStandard) {
+			const newTimeStandard = parseInt(data.newTimeStandard);
+			poll.timeStandard.checked = true;
+			poll.timeStandard.timeInSeconds = newTimeStandard;
+
+			poll.questions = poll.questions.map(function (question) {
+				question.timer = newTimeStandard;
+				return question;
+			});
+		}
+
+		// update poll visibility
+		if (data.visibility !== poll.visibility) {
+			poll.visibility = data.visibility;
+		}
 	}
 
-	// update modified date & question count
+	// update modified date
 	const date = currentDateTime();
 	poll.modified = date;
 	poll.modifiedSentence = dateStringToSentence(date);
@@ -299,7 +333,91 @@ function updatePoll(req, res) {
 }
 
 function updateQuestion(req, res) {
+	const data = req.body;
+	const questionNumber = parseInt(data.index);
+	const timer = parseInt(data.timer);
+	const creatorname = data.creatorname;
+	const pollId = data.pollId;
+	const questionHidden = data.hidden ? true : false;
+	const showResults = data.showresults ? true : false;
+	const optionTotal = data.answers.length;
+
+	// redirect if answer is empty
+	for (let i = 0; i < optionTotal; i++) {
+		if (data.answers[i] === "") {
+			return res.redirect(`/c/${creatorname}/poll/${pollId}/vraag-${data.index}-bewerken${optionTotal}`);
+		}
+	}
+
+	// find poll & question
+	const allPolls = file.readJSON("data/polls.json");
+	const poll = allPolls.find(function (poll) {
+		return poll.pollId === pollId;
+	});
+	const pollIndex = allPolls.findIndex(function (poll) {
+		return poll.pollId === pollId;
+	});
+	const question = poll.questions.find(function (question) {
+		return question.index === questionNumber;
+	});
+
+	// update options
+	if (optionTotal > question.options.length) {
+		// add option
+		for (let i = 0; i < optionTotal; i++) {
+			if (question.options[i]) {
+				continue;
+			}
+			const newOption = {
+				text: data.answers[i],
+				votes: 0
+			};
+			question.options.push(newOption);
+		}
+	} else if (optionTotal < question.options.length) {
+		// remove option
+	} else {
+		question.options.map(function (option, index) {
+			option.text = data.answers[index];
+			return option;
+		});
+	}
+
+	// update question timer
+	if (timer !== question.timer) {
+		question.timer = timer;
+		// disable time standard
+		if (question.timer !== poll.timeStandard.timeInSeconds) {
+			poll.timeStandard.checked = false;
+		}
+	}
+
+	// update hide question setting
+	if (questionHidden !== question.hidden) {
+		question.hidden = questionHidden;
+	}
+	// update show results question setting
+	if (showResults !== question.showresults) {
+		question.showresults = showResults;
+	}
 	
+
+	// update modified date
+	const date = currentDateTime();
+	poll.modified = date;
+	poll.modifiedSentence = dateStringToSentence(date);
+
+	// update question in poll
+	poll.questions[questionNumber - 1] = question;
+
+	// replace poll
+	allPolls.splice(pollIndex, 1, poll);
+
+	// update polls.json
+	db.add("polls", allPolls);
+
+	// redirect to edit poll
+	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
 }
 
 // data functions
