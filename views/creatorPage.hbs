@@ -42,7 +42,8 @@
 				<header>
 					<h3>{{title}}</h3>
 					<p><span><span>De {{title}} poll is </span>{{visibility}}</span>
-					<span><span>en heeft </span>{{questionCount}} vragen<span>.</span></span></p>
+					<span><span>en heeft </span>
+					{{#if singleQuestion}}1 vraag{{else}}{{questionCount}} vragen{{/if}}<span>.</span></span></p>
 				</header>
 				{{#if questions}}
 					<h4>Vragen</h4>
