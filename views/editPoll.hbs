@@ -42,7 +42,7 @@
 			{{#if questionLimit}}
 				<p>Je zit aan het maximum aan vragen</p>
 			{{else}}
-				<a href="vraag-toevoegen">Maak nieuwe vraag</a>
+				<a href="vraag-toevoegen">Vraag toevoegen</a>
 			{{/if}}
 			<div>
 				<input type="submit" name="savequestions" value="Wijzigingen opslaan">
@@ -77,10 +77,22 @@
 		{{/if}}
 		<fieldset>
 			<legend>Zichtbaarheid<span> {{pollname}} poll</span></legend>
-			<label><input type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
-			<label><input type="radio" name="visibility" value="besloten">Besloten <span>(alleen voor leden van jouw groep)</span>
+			{{#if open}}
+				<label><input checked type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
+			{{else}}
+				<label><input type="radio" name="visibility" value="open">Open <span>voor iedereen</span></label>
+			{{/if}}
+			{{#if limited}}
+				<label><input checked type="radio" name="visibility" value="besloten">Besloten <span>(alleen voor leden van jouw groep)</span>
+			{{else}}
+				<label><input type="radio" name="visibility" value="besloten">Besloten <span>(alleen voor leden van jouw groep)</span>
 			</label>
-			<label><input checked type="radio" name="visibility" value="privé">Priv&eacute; (alleen zichtbaar voor jou)</label>
+			{{/if}}
+			{{#if private}}
+				<label><input checked type="radio" name="visibility" value="privé">Priv&eacute; (alleen zichtbaar voor jou)</label>
+			{{else}}
+				<label><input type="radio" name="visibility" value="privé">Priv&eacute; (alleen zichtbaar voor jou)</label>
+			{{/if}}
 		</fieldset>
 		<div>
 		<input type="submit" name="savesettings" value="Instellingen opslaan">
@@ -89,4 +101,5 @@
 	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creatorname" value="{{creatorname}}">
 	</form>
+	<a href="/c/{{creatorname}}">Ga terug naar mijn overzicht</a>
 </main>
