@@ -11,25 +11,25 @@
 			<li><a href="#my-groups">Ga naar mijn groepen</a></li>
 		</ul>
 	</nav>
-	{{#if live}}
+	{{#if activePolls}}
 		<h2 id="live-polls">Actieve polls</h2>
 			{{#each activePolls}}
 				<article>
 					<header>
-						<h3>{{pollTitle}}</h3>
+						<h3>{{title}}</h3>
 						<p><span>De poll is op dit moment </span>Live<span>.</span></p>
-						<p><span>Deze poll is </span>>{{visibility}}<span>.</span></p>
+						<p><span>Deze poll is </span>{{visibility}}<span>.</span></p>
 					</header>
 					<section>
-						<h4>{{questionTitle}}</h4>
+						<h4>{{question.title}}</h4>
 						<ol>
-							{{#each answers}}
-								<li>{{answer}} <span>heeft {{votes}} stemmen.</span></li>
+							{{#each question.options}}
+								<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft {{votes}} stemmen.</span></li>
 							{{/each}}
 						</ol>
-						<p><span>Het totaal aantal stemmen is </span>{{votes}} stemmen<span>.</span></p>
+						<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
 					</section>
-					<p>{{pollProgress}}</p>
+					<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
 				</article>
 			{{/each}}
 		<a href="/c/{{creatorname}}">Update poll(s)</a>
@@ -56,16 +56,20 @@
 				<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
 				{{/if}}
 				<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
-				<ul>
-					<li>
-						<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
-					</li>
-					<li>
-						<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
-					</li>
-				</ul>
-				{{#if questions}}
-					<a href="/poll/{{pollId}}"><span>Poll </span>publiceren</a>
+				{{#if active}}
+				<a href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
+				{{else}}
+					<ul>
+						<li>
+							<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
+						</li>
+						<li>
+							<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
+						</li>
+					</ul>
+					{{#if questions}}
+						<a href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
+					{{/if}}
 				{{/if}}
 			</article>
 		{{/each}}
