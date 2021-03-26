@@ -18,10 +18,24 @@ function creatorOverview(req, res) {
 		return poll;
 	});
 
+	const activePolls = allPolls.filter(function (poll) {
+		return poll.active === true && poll.creator;
+	}).map(function (poll) {
+		const currentQuestionIndex = poll.currentQuestion;
+		const currentQuestion = poll.questions.find(function (question) {
+			return question.index === currentQuestionIndex;
+		});
+		poll.question = currentQuestion;
+		return poll;
+	});
+
+	console.log(creatorPolls);
+
 	res.render("creatorPage", {
-		title: `${creatorname} (Creator) · Polly`,
+		title: `${creatorname} · Creator · Polly`,
 		creatorname: creatorname,
 		myPolls: creatorPolls,
+		activePolls: activePolls
 	});
 }
 
