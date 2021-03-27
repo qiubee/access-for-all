@@ -74,6 +74,13 @@ function poll(req, res) {
 	});
 }
 
+function joinPoll(req, res) {
+	const data = req.params;
+
+	console.log(data);
+
+}
+
 function startPoll(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
@@ -259,6 +266,63 @@ function questionEditor(req, res) {
 }
 
 // data processing
+function voteOnPoll(req, res) {
+	const data = req.body;
+	const pollId = data.pollId;
+	const questionIndex = parseInt(data.index);
+
+	// redirect if no answer given
+	if (!data.answer && data.username) {
+		return res.redirect(`/poll/${pollId}${data.username}`);
+	} else if (!data.answer) {
+		return res.redirect(`/poll/${pollId}`);
+	}
+
+	// find poll & add vote + update totalvotes
+	const allPolls = file.readJSON("data/polls.json");
+	const updatedPolls = allPolls.map(function (poll) {
+		if (poll.pollId === pollId) {
+			poll.questions.map(function (question) {
+				if (question.index === questionIndex) {
+					question.options.map(function (option) {
+						// add vote to answer
+						if (option.text === data.answer) {
+							option.votes++;
+						}
+						return option;
+					});
+					// update totalvotes for question
+					question.totalvotes = question.options.reduce(function (acc, value) {
+						return acc + value.votes;
+					}, 0);
+				}
+				return question;
+			});
+			// update totalvotes for poll
+			poll.totalvotes = poll.questions.reduce(function (acc, question) {
+				const votes = question.options.reduce(function (acc, value) {
+					return acc + value.votes;
+				}, 0);
+				return acc + votes;
+			}, 0);
+		}
+		return poll;
+	});
+
+	// update polls.json
+	db.add("polls", updatedPolls);
+
+	console.log(currentDateTime() + ": Added vote to poll", pollId);
+
+	// redirect to poll
+	// redirect if no answer given
+	if (data.username) {
+		res.redirect(`/poll/${pollId}${data.username}`);
+	} else {
+		res.redirect(`/poll/${pollId}`);
+	}
+}
+
 function addPoll(req, res) {
 	const newPoll = req.body;
 	const creatorname = newPoll.creatorname;
@@ -325,6 +389,7 @@ function addQuestion(req, res) {
 			poll.questions.push(question);
 			poll.questionCount = poll.questions.length;
 			
+			// update modified date
 			const date = currentDateTime();
 			poll.modified = date;
 			poll.modifiedSentence = dateStringToSentence(date);
@@ -629,6 +694,8 @@ exports.createQuestion = questionCreator;
 exports.editQuestion = questionEditor;
 exports.start = startPoll;
 exports.stop = stopPoll;
+exports.join = joinPoll;
+exports.vote = voteOnPoll;
 exports.add = addPoll;
 exports.addQuestion = addQuestion;
 exports.removeQuestion = removeQuestion;
