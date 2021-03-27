@@ -3,7 +3,7 @@
 	<h1>Hey, {{creatorname}}</h1>
 	<nav>
 		<ul>
-			{{#if live}}
+			{{#if activePolls}}
 			<li><a href="#live-polls">Ga naar de actieve polls</a></li>
 			{{/if}}
 			<li><a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a></li>
@@ -13,26 +13,31 @@
 	</nav>
 	{{#if activePolls}}
 		<h2 id="live-polls">Actieve polls</h2>
-			{{#each activePolls}}
-				<article>
-					<header>
-						<h3>{{title}}</h3>
-						<p><span>De poll is op dit moment </span>Live<span>.</span></p>
-						<p><span>Deze poll is </span>{{visibility}}<span>.</span></p>
-					</header>
-					<section>
-						<h4>{{question.title}}</h4>
-						<ol>
-							{{#each question.options}}
-								<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft {{votes}} stemmen.</span></li>
-							{{/each}}
-						</ol>
-						<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
-					</section>
-					<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
-				</article>
-			{{/each}}
-		<a href="/c/{{creatorname}}">Update poll(s)</a>
+		{{#each activePolls}}
+			<article>
+				<header>
+					<h3>{{title}}</h3>
+					<p><span>De poll is op dit moment </span>Live<span>.</span></p>
+					<p><span>Deze poll is </span>{{visibility}}<span>.</span></p>
+				</header>
+				<section>
+					<h4>{{question.title}}</h4>
+					<ol>
+						{{#each question.options}}
+							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft {{votes}} stemmen.</span></li>
+						{{/each}}
+					</ol>
+					<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
+				</section>
+				<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
+				<a href="/poll/{{pollId}}{{creator}}">Ga naar poll<span> {{title}}</span></a>
+			</article>
+		{{/each}}
+		{{#if multiplePolls}}
+			<a href="/c/{{creatorname}}">Update polls</a>
+		{{else}}
+			<a href="/c/{{creatorname}}">Update poll</a>
+		{{/if}}
 	{{/if}}
 	<a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>
 	<h2 id="my-polls">Mijn polls</h2>
