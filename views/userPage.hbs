@@ -31,27 +31,21 @@
 				</header>
 				<section>
 					<h4>{{question.title}}</h4>
-					<form action="/vote" method="POST">
-					<fieldset>
-						<legend>Antwoorden</legend>
+					<ul>
 						{{#if poll.showresults}}
 							{{#each question.options}}
-								<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
-								<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+								<li data-votes="{{votes}}">{{text}}</li>
+								<p>{{text}} heeft {{votes}} stemmen.</p>
 							{{/each}}
 						{{else}}
 							{{#each question.options}}
-								<label><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+								<li>{{text}}</li>
 							{{/each}}
 						{{/if}}
-					</fieldset>
-					<div>
-						<input type="submit" value="Stem">
-					</div>
-				</form>
+					</ul>
 				</section>
 				<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
-				<a href="/poll/{{pollId}}{{username}}">Ga naar poll<span> {{title}}</span></a>
+				<a href="/poll/{{pollId}}{{username}}">Ga naar poll<span> {{title}} om mee te doen</span></a>
 			</article>
 			</li>
 			{{/each}}
