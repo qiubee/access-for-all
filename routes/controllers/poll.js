@@ -9,7 +9,6 @@ function poll(req, res) {
 
 	const allPolls = file.readJSON("data/polls.json");
 	const poll = allPolls.find(function (poll) {
-		console.log(pollId);
 		return poll.pollId === pollId;
 	});
 
