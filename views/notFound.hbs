@@ -1,0 +1,15 @@
+{{#if creatorname}}
+{{> creatorHeader}}
+{{else if user}}
+{{> userHeader}}
+{{else}}
+{{> pageHeader}}
+{{/if}}
+<main id="content">
+	<h1>De pagina bestaat niet, tenzij je uit de toekomst komt</h1>
+	<p>De pagina hebben we niet kunnen vinden. Hier zijn een paar suggesties:</p>
+	<ul>
+		<li><a href="/zoek-poll">Zoek een poll</a></li>
+		<li><a href="/creators">Creators</a></li>
+	</ul>
+</main>
