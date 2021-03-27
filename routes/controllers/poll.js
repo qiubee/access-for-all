@@ -30,14 +30,28 @@ function poll(req, res) {
 	});
 
 	if (user) {
-		return res.render("poll", {
-			title: `${poll.title} · Polly`,
-			user: user,
-			voter: true,
-			username: user.username,
-			poll: poll,
-			question: currentQuestion
-		});
+		if (data.vote) {
+			const vote = currentQuestion.options[parseInt(data.vote)].text;
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				user: user,
+				voter: true,
+				hasVoted: true,
+				vote: vote,
+				username: user.username,
+				poll: poll,
+				question: currentQuestion
+			});
+		} else {
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				user: user,
+				voter: true,
+				username: user.username,
+				poll: poll,
+				question: currentQuestion
+			});
+		}
 	}
 
 	const creator = allUsers.creator.find(function (creator) {
