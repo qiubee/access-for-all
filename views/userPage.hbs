@@ -19,25 +19,43 @@
 		</form>
 	</section>
 	
-	{{#if live}}
+	{{#if livePolls}}
 	<section>
 		<h2 id="live-polls">Live polls</h2>
-			{{#each activePolls}}
+		<ul>
+			{{#each livePolls}}
+			<li>
 				<article>
-					<header>
-						<h3>{{pollTitle}}</h3>
-					</header>
-					<section>
-						<form action="/poll" method="POST">
-						<h4>{{questionTitle}}</h4>
-						{{#each answers}}
-						<label><input type="radio" name="{{questionNumber}}" value="{{optionIndex}}">{{answer}}</label>
-						{{/each}}
-						</form>
-					</section>
-					<p>{{pollProgress}}</p>
-				</article>
+				<header>
+					<h3>{{title}}</h3>
+				</header>
+				<section>
+					<h4>{{question.title}}</h4>
+					<form action="/vote" method="POST">
+					<fieldset>
+						<legend>Antwoorden</legend>
+						{{#if poll.showresults}}
+							{{#each question.options}}
+								<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+								<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+							{{/each}}
+						{{else}}
+							{{#each question.options}}
+								<label><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+							{{/each}}
+						{{/if}}
+					</fieldset>
+					<div>
+						<input type="submit" value="Stem">
+					</div>
+				</form>
+				</section>
+				<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
+				<a href="/poll/{{pollId}}{{username}}">Ga naar poll<span> {{title}}</span></a>
+			</article>
+			</li>
 			{{/each}}
+		</ul>
 		{{#if multiplePolls}}
 			<a href="/u/{{username}}">Update polls</a>
 		{{else}}
