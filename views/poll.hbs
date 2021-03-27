@@ -1,1 +1,74 @@
+{{#if creatorname}}
+{{> creatorHeader}}
+{{else if user}}
+{{> userHeader}}
+{{else}}
 {{> pageHeader}}
+{{/if}}
+<main id="content">
+	<article>
+		<header>
+			<h1>{{poll.title}}</h1>
+			{{#if voter}}
+				<p>Vraag {{poll.currentQuestion}} van {{poll.questionCount}}<span>.</span></p>
+			{{else}}
+			<ul>
+				<li><span>De poll is op dit moment </span>Live</li>
+				<li><span>De poll is </span>{{poll.visibility}}</li>
+				<li>Gestart {{startTime}}</li>
+			</ul>
+			{{/if}}
+		</header>
+		<section>
+			<h2>{{question.title}}</h2>
+			{{#if voter}}
+				<form action="/vote" method="POST">
+					<fieldset>
+						<legend>Antwoorden</legend>
+						{{#if poll.showresults}}
+							{{#each question.options}}
+								<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+								<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+							{{/each}}
+						{{else}}
+							{{#each question.options}}
+								<label><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+							{{/each}}
+						{{/if}}
+					</fieldset>
+					<div>
+						<input type="submit" value="Stem">
+					</div>
+				</form>
+				{{#if poll.showresults}}
+				<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
+				{{/if}}
+			{{else}}
+				<p>Antwoorden:</p>
+				<ul>
+					{{#each question.options}}
+						<li data-votes="{{votes}}">{{text}}</li>
+						<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+					{{/each}}
+				</ul>
+				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
+				<h3>Instellingen</h3>
+				{{#if question.showresults}}
+					<p>Resultaten worden weergegeven.</p>
+				{{else}}
+					<form action="/update-vraag" method="POST">
+						<label>Resultaten weergeven <input type="checkbox" name="showresults"></label>
+						<input type="hidden" name="pollId" value="{{poll.pollId}}">
+						<input type="hidden" name="index" value="{{poll.currentQuestion}}">
+						<input type="hidden" name="creatorname" value="{{creatorname}}">
+						<input type="hidden" name="live" value="true">
+						<div>
+							<input type="submit" value="Wijzigingen oplsaan">
+						</div>
+					</form>
+				{{/if}}
+				<a href="/c/{{creatorname}}/poll/{{poll.pollId}}/stop"><span>Poll </span>stoppen</a>
+			{{/if}}
+		</section>
+	</article>
+</main>
