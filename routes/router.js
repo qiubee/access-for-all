@@ -33,6 +33,7 @@ router.get("/", index)
 	.post("/maak-poll", poll.add)
 	.post("/vraag-toevoegen", poll.addQuestion)
 	.post("/update-poll", poll.update)
-	.post("/update-vraag", poll.updateQuestion);
+	.post("/update-vraag", poll.updateQuestion)
+	.post("/vote", poll.vote);
 
 module.exports = router;
