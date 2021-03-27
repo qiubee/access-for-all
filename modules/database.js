@@ -1,14 +1,15 @@
 const { readJSON, writeToJSON} = require("./file");
 const { currentDateTime } = require("./date");
+const dataSource = process.env.DB_FOLDER;
 
 function addToDatabase(name, data) {
-	JSON.stringify(writeToJSON(`${process.env.DB_FOLDER}/` + name + ".json", data));
-	console.log(currentDateTime() + ": Data added to: \"" + name + ".json\"");
+	JSON.stringify(writeToJSON(`${dataSource}/` + name + ".json", data));
+	console.log(currentDateTime() + `: Data added to: ${dataSource}/${name}.json`);
 }
 
 function readFromDatabase(name) {
-	console.log(currentDateTime() + ": Data loaded from: \"" + name + ".json\"");
-	return readJSON(`${process.env.DB_FOLDER}/` + name + ".json");
+	console.log(currentDateTime() + `: Data loaded from: ${dataSource}/${name}.json"`);
+	return readJSON(`${dataSource}/` + name + ".json");
 }
 
 exports.add = addToDatabase;
