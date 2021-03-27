@@ -33,9 +33,14 @@
 							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft {{votes}} stemmen.</span></li>
 						{{/each}}
 					</ol>
-					<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
 				</section>
-				<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
+				<section>
+						<h4>Informatie poll</h4>
+						<ul>
+						<li><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen</li>
+						<li>Vraag <span>{{currentQuestion}}</span> van <span>{{questionCount}}</span></li>
+						</ul>
+					</section>
 				<a href="/poll/{{pollId}}{{creator}}">Ga naar poll<span> {{title}}</span></a>
 			</article>
 		</li>
