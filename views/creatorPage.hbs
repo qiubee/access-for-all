@@ -12,13 +12,19 @@
 		</ul>
 	</nav>
 	{{#if activePolls}}
+	<section>
 		<h2 id="live-polls">Actieve polls</h2>
+		<ul>
 		{{#each activePolls}}
+		<li>
 			<article>
 				<header>
 					<h3>{{title}}</h3>
-					<p><span>De poll is op dit moment </span>Live<span>.</span></p>
-					<p><span>Deze poll is </span>{{visibility}}<span>.</span></p>
+					<ul>
+						<li><span>De poll is op dit moment </span>Live</li>
+						<li><span>De poll is </span>{{poll.visibility}}</li>
+						<li>Gestart {{startTime}}</li>
+					</ul>
 				</header>
 				<section>
 					<h4>{{question.title}}</h4>
@@ -32,70 +38,81 @@
 				<p>Vraag {{currentQuestion}} van {{questionCount}}<span>.</span></p>
 				<a href="/poll/{{pollId}}{{creator}}">Ga naar poll<span> {{title}}</span></a>
 			</article>
+		</li>
 		{{/each}}
+		</ul>
 		{{#if multiplePolls}}
 			<a href="/c/{{creatorname}}">Update polls</a>
 		{{else}}
 			<a href="/c/{{creatorname}}">Update poll</a>
 		{{/if}}
+	</section>
 	{{/if}}
 	<a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>
-	<h2 id="my-polls">Mijn polls</h2>
-	{{#if myPolls}}
-		{{#each myPolls}}
-			<article>
-				<header>
-					<h3>{{title}}</h3>
-					<p><span><span>De {{title}} poll is </span>{{visibility}}</span>
-					<span><span>en heeft </span>
-					{{#if singleQuestion}}1 vraag{{else}}{{questionCount}} vragen{{/if}}<span>.</span></span></p>
-				</header>
-				{{#if questions}}
-					<h4>Vragen</h4>
-					<ol>
-						{{#each questions}}
-								<li>{{title}}</li>
-						{{/each}}
-					</ol>
-				{{else}}
-				<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
-				{{/if}}
-				<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
-				{{#if active}}
-				<a href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
-				{{else}}
-					<ul>
-						<li>
-							<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
-						</li>
-						<li>
-							<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
-						</li>
-					</ul>
-					{{#if questions}}
-						<a href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
-					{{/if}}
-				{{/if}}
-			</article>
-		{{/each}}
-	{{else}}
-	<p>Je hebt nog geen polls gemaakt. <a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>.</p>
-	{{/if}}
-	<h2 id="my-groups">Mijn groepen</h2>
-	{{#if groups}}
+	<section>
+		<h2 id="my-polls">Mijn polls</h2>
+		{{#if myPolls}}
 		<ul>
-			{{#each group}}
+			{{#each myPolls}}
 			<li>
-				<a href="/c/{{creatorname}}/groep/{{name}}">{{name}}</a>
+				<article>
+					<header>
+						<h3>{{title}}</h3>
+						<p><span><span>De {{title}} poll is </span>{{visibility}}</span>
+						<span><span>en heeft </span>
+						{{#if singleQuestion}}1 vraag{{else}}{{questionCount}} vragen{{/if}}<span>.</span></span></p>
+					</header>
+					{{#if questions}}
+						<h4>Vragen</h4>
+						<ol>
+							{{#each questions}}
+									<li>{{title}}</li>
+							{{/each}}
+						</ol>
+					{{else}}
+					<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
+					{{/if}}
+					<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
+					{{#if active}}
+					<a href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
+					{{else}}
+						<ul>
+							<li>
+								<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
+							</li>
+							<li>
+								<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
+							</li>
+						</ul>
+						{{#if questions}}
+							<a href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
+						{{/if}}
+					{{/if}}
+				</article>
 			</li>
 			{{/each}}
+			</ul>
+		{{else}}
+		<p>Je hebt nog geen polls gemaakt. <a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>.</p>
+		{{/if}}
+	</section>
+	<section>
+		<h2 id="my-groups">Mijn groepen</h2>
+		{{#if groups}}
+			<ul>
+				{{#each group}}
+				<li>
+					<a href="/c/{{creatorname}}/groep/{{name}}">{{name}}</a>
+				</li>
+				{{/each}}
+			</ul>
+			<a href="/groep-aanmaken">Maak een nieuwe groep aan</a>
+		{{else}}
+		<p>Je bent nog niet aangesloten bij een groep. Je kunt zelf een groep maken of zoeken naar een groep om bij aan te sluiten.</p>
+		<ul>
+			<li><a href="/groep-aanmaken">Maak een nieuwe groep aan</a></li>
+			<li><a href="/groepen">Groep zoeken</a></li>
 		</ul>
-		<a href="/groep-aanmaken">Maak een nieuwe groep aan</a>
-	{{else}}
-	<p>Je bent nog niet aangesloten bij een groep. Je kunt zelf een groep maken of zoeken naar een groep om bij aan te sluiten.</p>
-	<ul>
-		<li><a href="/groep-aanmaken">Maak een nieuwe groep aan</a></li>
-		<li><a href="/groepen">Groep zoeken</a></li>
-	</ul>
-	{{/if}}
+		{{/if}}
+	</section>
 </main>
