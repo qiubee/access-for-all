@@ -4,11 +4,58 @@ const { isOrdered } = require("../../modules/sort");
 const { currentDateTime, dateStringToSentence } = require("../../modules/date");
 
 function poll(req, res) {
-	const params = req.params;
-	console.log(params);
-	const pollTitle = "Poll";
+	const data = req.params;
+	const pollId = req.params.pollId;
+
+	const allPolls = file.readJSON("data/polls.json");
+	const poll = allPolls.find(function (poll) {
+		console.log(pollId);
+		return poll.pollId === pollId;
+	});
+
+	// poll not found
+	if (!poll) {
+		return res.render("poll", {
+			title: "Poll niet gevonden · Polly",
+			nopoll: true
+		});
+	}
+
+	const currentQuestion = poll.questions.find(function (question) {
+		return question.index === poll.currentQuestion;
+	});
+
+	const allUsers = file.readJSON("data/users.json");
+	const user = allUsers.user.find(function (user) {
+		return user === data.user;
+	});
+
+	if (user) {
+		return res.render("poll", {
+			title: `${poll.title} · Polly`,
+			user: user,
+			pollTitle: poll,
+			question: currentQuestion
+		});
+	}
+
+	const creator = allUsers.creator.find(function (creator) {
+		return creator.username === data.username;
+	});
+
+	if (creator) {
+		return res.render("poll", {
+			title: `${poll.title} · Polly`,
+			creator: creator,
+			poll: poll,
+			question: currentQuestion
+		});
+	}
+
 	res.render("poll", {
-		title: `${pollTitle} · Polly` 
+		title: `${poll.title} · Polly`,
+		poll: poll,
+		question: currentQuestion
 	});
 }
 
