@@ -8,10 +8,39 @@ Create polls, share polls, join and vote!
 
 ## Content
 
+* [Dependencies](#dependencies)
+* [Installation](#installation)
 * [Functionalities](#functionalities)
 * [Wireflow](#wireflow)
 * [Testing](#testing)
-* [Miscellaneous](#Miscellaneous)
+* [Miscellaneous](#miscellaneous)
+
+## Dependencies
+
+* Express
+* Express-handlebars
+
+For other dependencies see [**`package.json`**](package.json)
+
+## Installation
+
+1. Clone the repository and navigate to the directory.
+
+2. **Install dependencies:**
+
+	```bash
+	npm install
+	```
+
+### Run application
+
+```bash
+# To run the server
+npm run start
+
+# To run the development environment
+npm run dev
+```
 
 ## Functionalities
 
@@ -46,4 +75,4 @@ The results of the assingments about *Progressive Enhancement* and feature testi
 
 ### License
 
-[MIT](LICENSE)
+[**MIT**](LICENSE)
