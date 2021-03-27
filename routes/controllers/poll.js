@@ -26,14 +26,16 @@ function poll(req, res) {
 
 	const allUsers = file.readJSON("data/users.json");
 	const user = allUsers.user.find(function (user) {
-		return user === data.user;
+		return user.username === data.username;
 	});
 
 	if (user) {
 		return res.render("poll", {
 			title: `${poll.title} · Polly`,
 			user: user,
-			pollTitle: poll,
+			voter: true,
+			username: user.username,
+			poll: poll,
 			question: currentQuestion
 		});
 	}
@@ -43,17 +45,31 @@ function poll(req, res) {
 	});
 
 	if (creator) {
-		return res.render("poll", {
-			title: `${poll.title} · Polly`,
-			creator: creator,
-			poll: poll,
-			question: currentQuestion
-		});
+		if (creator.username === poll.creator) {
+			const pollStarted = dateStringToSentence(poll.started);
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				creator: creator,
+				creatorname: creator.username,
+				startTime: pollStarted,
+				poll: poll,
+				question: currentQuestion
+			});
+		} else {
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				creatorname: creator.username,
+				voter: true,
+				poll: poll,
+				question: currentQuestion
+			});
+		}
 	}
 
 	res.render("poll", {
 		title: `${poll.title} · Polly`,
 		poll: poll,
+		voter: true,
 		question: currentQuestion
 	});
 }
@@ -68,6 +84,11 @@ function startPoll(req, res) {
 			poll.active = true;
 			poll.started = currentDateTime();
 			poll.currentQuestion = 1;
+
+			// update modified date
+			const date = currentDateTime();
+			poll.modified = date;
+			poll.modifiedSentence = dateStringToSentence(date);
 		}
 		return poll;
 	});
@@ -76,6 +97,31 @@ function startPoll(req, res) {
 	db.add("polls", updatedPolls);
 
 	console.log(currentDateTime(), `: Poll ${pollId} is now active`);
+
+	// redirect to edit poll
+	res.redirect(`/c/${creatorname}`);
+}
+
+function stopPoll(req, res) {
+	const creatorname = req.params.creatorname;
+	const pollId = req.params.pollId;
+
+	const allPolls = file.readJSON("data/polls.json");
+	const updatedPolls = allPolls.map(function (poll) {
+		if (poll.pollId === pollId) {
+			poll.active = false;
+
+			// update modified date
+			const date = currentDateTime();
+			poll.stopped = date;
+		}
+		return poll;
+	});
+	
+	// update polls.json
+	db.add("polls", updatedPolls);
+
+	console.log(currentDateTime(), `: Poll ${pollId} is now closed`);
 
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}`);
@@ -422,12 +468,14 @@ function updateQuestion(req, res) {
 	const pollId = data.pollId;
 	const questionHidden = data.hidden ? true : false;
 	const showResults = data.showresults ? true : false;
-	const optionTotal = data.answers.length;
+	const optionTotal = data.answers ? dats.answers.length : 0;
 
-	// redirect if answer is empty
-	for (let i = 0; i < optionTotal; i++) {
-		if (data.answers[i] === "") {
-			return res.redirect(`/c/${creatorname}/poll/${pollId}/vraag-${data.index}-bewerken${optionTotal}`);
+	if (!data.live) {
+		// redirect if answer is empty
+		for (let i = 0; i < optionTotal; i++) {
+			if (data.answers[i] === "") {
+				return res.redirect(`/c/${creatorname}/poll/${pollId}/vraag-${data.index}-bewerken${optionTotal}`);
+			}
 		}
 	}
 
@@ -466,7 +514,7 @@ function updateQuestion(req, res) {
 	}
 
 	// update question timer
-	if (timer !== question.timer) {
+	if (timer && timer !== question.timer) {
 		question.timer = timer;
 		// disable time standard
 		if (question.timer !== poll.timeStandard.timeInSeconds) {
@@ -496,6 +544,11 @@ function updateQuestion(req, res) {
 
 	// update polls.json
 	db.add("polls", allPolls);
+
+	// when poll is live, redirect to poll
+	if (data.live) {
+		return res.redirect(`/poll/${pollId}${creatorname}`);
+	}
 
 	// redirect to edit poll
 	res.redirect(`/c/${creatorname}/poll/${pollId}/edit`);
@@ -575,6 +628,7 @@ exports.edit = pollEditor;
 exports.createQuestion = questionCreator;
 exports.editQuestion = questionEditor;
 exports.start = startPoll;
+exports.stop = stopPoll;
 exports.add = addPoll;
 exports.addQuestion = addQuestion;
 exports.removeQuestion = removeQuestion;
