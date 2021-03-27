@@ -15,7 +15,7 @@
 			<ul>
 				<li><span>De poll is op dit moment </span>Live</li>
 				<li><span>De poll is </span>{{poll.visibility}}</li>
-				<li>Gestart {{startTime}}</li>
+				<li>Gestart<span> op</span> {{startTime}}</li>
 			</ul>
 			{{/if}}
 		</header>
@@ -36,6 +36,11 @@
 							{{/each}}
 						{{/if}}
 					</fieldset>
+					<input type="hidden" name="pollId" value="{{poll.pollId}}">
+					<input type="hidden" name="index" value="{{poll.currentQuestion}}">
+					{{#if username}}
+						<input type="hidden" name="username" value="{{username}}">
+					{{/if}}
 					<div>
 						<input type="submit" value="Stem">
 					</div>
