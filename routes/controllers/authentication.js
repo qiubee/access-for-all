@@ -1,7 +1,6 @@
 const { verifyUser } = require("../../modules/verification");
 const { currentDateTime } = require("../../modules/date");
-const file = require("../../modules/file");
-
+const db = require("../../modules/database");
 
 function authenticate(req, res) {
 	const { username, password } = req.body;
@@ -53,7 +52,7 @@ function authorized(req, res, next) {
 		return res.redirect("/login");
 	}
 
-	const allUsers = file.readJSON("data/users.json");
+	const allUsers = db.read("users");
 
 	if (data.username) {
 		const users = allUsers.user;

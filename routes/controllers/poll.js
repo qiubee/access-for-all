@@ -1,5 +1,4 @@
 const db = require("../../modules/database");
-const file = require("../../modules/file");
 const { isOrdered } = require("../../modules/sort");
 const { currentDateTime, dateStringToSentence } = require("../../modules/date");
 
@@ -7,7 +6,7 @@ function poll(req, res) {
 	const data = req.params;
 	const pollId = req.params.pollId;
 
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const poll = allPolls.find(function (poll) {
 		return poll.pollId === pollId;
 	});
@@ -24,7 +23,7 @@ function poll(req, res) {
 		return question.index === poll.currentQuestion;
 	});
 
-	const allUsers = file.readJSON("data/users.json");
+	const allUsers = db.read("users");
 	const user = allUsers.user.find(function (user) {
 		return user.username === data.username;
 	});
@@ -99,7 +98,7 @@ function startPoll(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
 
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const updatedPolls = allPolls.map(function (poll) {
 		if (poll.pollId === pollId) {
 			poll.active = true;
@@ -127,7 +126,7 @@ function stopPoll(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
 
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const updatedPolls = allPolls.map(function (poll) {
 		if (poll.pollId === pollId) {
 			poll.active = false;
@@ -165,7 +164,7 @@ function pollCreator(req, res) {
 function pollEditor(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const poll = allPolls.find(function (poll) {
 		return poll.pollId === pollId;
 	});
@@ -226,7 +225,7 @@ function questionEditor(req, res) {
 	const pollId = req.params.pollId;
 
 	// find poll by id
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const poll = allPolls.find(function (poll) {
 		if (poll.pollId === pollId) {
 			return poll;
@@ -293,7 +292,7 @@ function voteOnPoll(req, res) {
 	}
 
 	// find poll & add vote + update totalvotes
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const updatedPolls = allPolls.map(function (poll) {
 		if (poll.pollId === pollId) {
 			poll.questions.map(function (question) {
@@ -373,7 +372,7 @@ function addPoll(req, res) {
 	delete newPoll.creatorname;
 
 	// read polls.json & add new poll
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	allPolls.push(newPoll);
 
 	// add to polls.json
@@ -397,7 +396,7 @@ function addQuestion(req, res) {
 	});
 	
 	// add question to poll
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	allPolls.map(function (poll) {
 		if (poll.pollId === pollId) {
 			const question = {
@@ -433,7 +432,7 @@ function removeQuestion(req, res) {
 	const pollId = req.params.pollId;
 
 
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	allPolls.map(function (poll) {
 		if (poll.pollId === data.pollId) {
 			const questions = poll.questions;
@@ -471,7 +470,7 @@ function updatePoll(req, res) {
 	const pollId = data.pollId;
 	
 	// find poll
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const poll = allPolls.find(function (poll) {
 		return poll.pollId === pollId;
 	});
@@ -567,7 +566,7 @@ function updateQuestion(req, res) {
 	}
 
 	// find poll & question
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 	const poll = allPolls.find(function (poll) {
 		return poll.pollId === pollId;
 	});
@@ -644,7 +643,7 @@ function updateQuestion(req, res) {
 function removePoll(req, res) {
 	const creatorname = req.params.creatorname;
 	const pollId = req.params.pollId;
-	const allPolls = file.readJSON("data/polls.json");
+	const allPolls = db.read("polls");
 
 	// find poll
 	const pollIndex = allPolls.findIndex(function (poll) {
@@ -663,7 +662,7 @@ function removePoll(req, res) {
 
 // data functions
 function generatePollID() {
-	const madePolls = file.readJSON("data/polls.json");
+	const madePolls = db.read("polls");
 	
 	const pollIds = madePolls.map(function (poll) {
 		return poll.pollId;
@@ -686,7 +685,7 @@ function generatePollID() {
 function getStandardTimeOptions(pollId, pollData=false) {
 	let timeStandard = [];
 	if (!pollData) {
-		const allPolls = file.readJSON("data/polls.json");
+		const allPolls = db.read("polls");
 		timeStandard = allPolls.find(function (poll) {
 			return poll.pollId === pollId;
 		}).timeStandard;

@@ -1,5 +1,5 @@
-const file = require("../../modules/file");
 const { dateStringToSentence } = require("../../modules/date");
+const db = require("../../modules/database");
 
 function creators(req, res) {
 	res.render("creators", {
@@ -9,7 +9,7 @@ function creators(req, res) {
 
 function creatorOverview(req, res) {
 	const creatorname = req.params.creatorname || "Creator";
-	const allPolls = file.readJSON("/data/polls.json");
+	const allPolls = db.read("polls");
 	const creatorPolls = allPolls.filter(function (poll) {
 		return poll.creator === creatorname;
 	}).map(function (poll) {

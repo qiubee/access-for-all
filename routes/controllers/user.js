@@ -1,4 +1,4 @@
-const file = require("../../modules/file");
+const db = require("../../modules/database");
 
 function createUser(req, res) {
 	res.render("createProfile", {
@@ -8,7 +8,7 @@ function createUser(req, res) {
 
 function userOverview(req, res) {
 	const username = req.params.username;
-	const allPolls = file.readJSON("/data/polls.json");
+	const allPolls = db.read("polls");
 
 	const livePolls = allPolls.filter(function (poll) {
 		return poll.active && poll.visibility === "open";
