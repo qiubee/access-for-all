@@ -9,14 +9,23 @@ function createUser(req, res) {
 function userOverview(req, res) {
 	const username = req.params.username;
 	const allPolls = file.readJSON("/data/polls.json");
-	const user = file.readJSON("/data/users.json").user.find(function (user) {
-		return user.username === username;
-	});
 
+	const livePolls = allPolls.filter(function (poll) {
+		return poll.active && poll.visibility === "open";
+	}).map(function (poll) {
+		const currentQuestionIndex = poll.currentQuestion;
+		const currentQuestion = poll.questions.find(function (question) {
+			return question.index === currentQuestionIndex;
+		});
+		poll.question = currentQuestion;
+		poll.username = username;
+		return poll;
+	});
 
 	res.render("userPage", {
 		title: `${username} · Polly`,
 		username: username,
+		livePolls: livePolls,
 		multipleLive: livePolls.length > 1
 	});
 }
