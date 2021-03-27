@@ -38,7 +38,11 @@
 					<p>{{pollProgress}}</p>
 				</article>
 			{{/each}}
-		<a href="/u/{{username}}">Update poll(s)</a>
+		{{#if multiplePolls}}
+			<a href="/u/{{username}}">Update polls</a>
+		{{else}}
+			<a href="/u/{{username}}">Update poll</a>
+		{{/if}}
 	</section>
 	{{/if}}
 
