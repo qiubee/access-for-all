@@ -20,6 +20,12 @@ app.set("view engine", "hbs")
 app.use(express.static("public")) // use public folder for static files
 	.use(express.urlencoded({extended: true})) // get data from http body
 	.use("/", router) // routing
+	.use(function (req, res) {
+		res.status(404);
+		res.render("notFound", {
+			title: "O nee, de pagina bestaat niet · Polly"
+		});
+	})
 	.disable("x-powered-by")
 	.listen(port, function () {
 	console.log(`Listening on localhost:${port}`);
