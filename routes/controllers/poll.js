@@ -309,17 +309,25 @@ function voteOnPoll(req, res) {
 		return poll;
 	});
 
+	// find index of answer
+	const optionNumberVoted = allPolls.find(function (poll) {
+		return poll.pollId === pollId;
+	}).questions.find(function (question) {
+		return question.index === questionIndex;
+	}).options.findIndex(function (option) {
+		return option.text === data.answer;
+	});
+
 	// update polls.json
 	db.add("polls", updatedPolls);
 
 	console.log(currentDateTime() + ": Added vote to poll", pollId);
 
 	// redirect to poll
-	// redirect if no answer given
 	if (data.username) {
-		res.redirect(`/poll/${pollId}${data.username}`);
+		res.redirect(`/poll/${pollId}${data.username}${optionNumberVoted}`);
 	} else {
-		res.redirect(`/poll/${pollId}`);
+		res.redirect(`/poll/${pollId}${optionNumberVoted}`);
 	}
 }
 
