@@ -1,4 +1,5 @@
 const file = require("../../modules/file");
+const { dateStringToSentence } = require("../../modules/date");
 
 function creators(req, res) {
 	res.render("creators", {
@@ -26,6 +27,7 @@ function creatorOverview(req, res) {
 			return question.index === currentQuestionIndex;
 		});
 		poll.question = currentQuestion;
+		poll.startTime = dateStringToSentence(poll.started);
 		return poll;
 	});
 
