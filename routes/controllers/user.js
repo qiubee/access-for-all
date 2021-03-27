@@ -16,7 +16,8 @@ function userOverview(req, res) {
 
 	res.render("userPage", {
 		title: `${username} · Polly`,
-		username: username
+		username: username,
+		multipleLive: livePolls.length > 1
 	});
 }
 
