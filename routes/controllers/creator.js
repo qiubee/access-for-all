@@ -29,13 +29,12 @@ function creatorOverview(req, res) {
 		return poll;
 	});
 
-	console.log(creatorPolls);
-
 	res.render("creatorPage", {
 		title: `${creatorname} · Creator · Polly`,
 		creatorname: creatorname,
 		myPolls: creatorPolls,
-		activePolls: activePolls
+		activePolls: activePolls,
+		multipleActive: creatorPolls.length > 1
 	});
 }
 
