@@ -1,14 +1,17 @@
 const { readJSON, writeToJSON} = require("./file");
 const { currentDateTime } = require("./date");
+require("dotenv").config();
+
+const FOLDER = process.env.DB_FOLDER || "data";
 
 function addToDatabase(name, data) {
-	JSON.stringify(writeToJSON(`${process.env.DB_FOLDER}/` + name + ".json", data));
-	console.log(currentDateTime() + `: Data added to: ${process.env.DB_FOLDER}/${name}.json`);
+	JSON.stringify(writeToJSON(`${FOLDER}/` + name + ".json", data));
+	console.log(currentDateTime() + `: Data added to: ${FOLDER}/${name}.json`);
 }
 
 function readFromDatabase(name) {
-	console.log(currentDateTime() + `: Data loaded from: ${process.env.DB_FOLDER}/${name}.json`);
-	return readJSON(`${process.env.DB_FOLDER}/` + name + ".json");
+	console.log(currentDateTime() + `: Data loaded from: ${FOLDER}/${name}.json`);
+	return readJSON(`${FOLDER}/` + name + ".json");
 }
 
 exports.add = addToDatabase;
