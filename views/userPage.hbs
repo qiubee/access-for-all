@@ -15,7 +15,7 @@
 		<form action="/join" method="GET">
 			<p>Voer de code in van de poll mee te doen.</p>
 			<label>Code <input name="pollnumber" type="search" maxlength="10" placeholder="Voer de code in van de poll"></label>
-			<input type="submit" value="Ga naar poll">
+			<input class="button" type="submit" value="Ga naar poll">
 		</form>
 	</section>
 	
@@ -51,9 +51,9 @@
 			{{/each}}
 		</ul>
 		{{#if multiplePolls}}
-			<a href="/u/{{username}}">Update polls</a>
+			<a class="button" href="/u/{{username}}">Update polls</a>
 		{{else}}
-			<a href="/u/{{username}}">Update poll</a>
+			<a class="button" href="/u/{{username}}">Update poll</a>
 		{{/if}}
 	</section>
 	{{/if}}
