@@ -1,5 +1,5 @@
 {{> pageHeader}}
-<main id="content">
+<main id="content" class="login">
 <h1>Login als Creator</h1>
 {{#if loginFailed}}
 	<div>
@@ -11,7 +11,7 @@
 	<label>Gebruikersnaam <input name="username" type="text"></label>
 	<label>Wachtwoord <input name="password" type="password"></label>
 	<input type="hidden" name="type" value="creator">
-	<input type="submit" value="Log in">
+	<input class="button call-to-action" type="submit" value="Log in">
 </form>
 <p>Wil je Creator worden? <a href="/creator-profiel-aanmaken">Maak een Creator-profiel</a>.</p>
 </main>

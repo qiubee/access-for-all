@@ -5,7 +5,7 @@
 {{else}}
 {{> pageHeader}}
 {{/if}}
-<main id="content">
+<main id="content" class="poll">
 	<article>
 		<header>
 			<h1>{{poll.title}}</h1>
@@ -58,13 +58,13 @@
 						<input type="hidden" name="username" value="{{username}}">
 					{{/if}}
 					<div>
-						<input type="submit" value="Stem">
+						<input class="button" type="submit" value="Stem">
 					</div>
 				</form>
 				{{/if}}
 				{{#if question.showresults}}
 				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
-				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> poll</span></a>
+				<a class="button activate" href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> poll</span></a>
 				{{/if}}
 			{{else}}
 				<p>Antwoorden:</p>
@@ -75,7 +75,7 @@
 					{{/each}}
 				</ul>
 				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
-				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
+				<a class="button activate" href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
 				<h3>Instellingen</h3>
 				{{#if question.showresults}}
 					<p>Resultaten worden weergegeven.</p>
@@ -87,11 +87,11 @@
 						<input type="hidden" name="creatorname" value="{{creatorname}}">
 						<input type="hidden" name="live" value="true">
 						<div>
-							<input type="submit" value="Wijzigingen oplsaan">
+							<input class="button call-to-action" type="submit" value="Wijzigingen oplsaan">
 						</div>
 					</form>
 				{{/if}}
-				<a href="/c/{{creatorname}}/poll/{{poll.pollId}}/stop"><span>Poll </span>stoppen</a>
+				<a class="button danger" href="/c/{{creatorname}}/poll/{{poll.pollId}}/stop"><span>Poll </span>stoppen</a>
 			{{/if}}
 		</section>
 	</article>

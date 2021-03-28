@@ -1,11 +1,12 @@
 {{> pageHeader}}
-<main id="content">
+<main id="content" class="create-profile">
 	{{#if creator}}
 	<h1>Creator profiel aanmaken</h1>
 	{{else}}
 	<h1>Nieuw profiel maken</h1>
 	{{/if}}
 	<form action="/profiel-aanmaken" method="POST">
+		<div>
 		{{#if duplicateUsername}}
 			<p>Sorry, de gebruikersnaam <span>{{duplicateUsername}}</span> is al in gebruik.</p>
 		{{/if}}
@@ -15,6 +16,7 @@
 		{{#if weakPassword}}
 			<p>Oeps, het wachtwoord is niet sterk genoeg. Probeer een beter wachtwoord te bedenken.</p>
 		{{/if}}
+		</div>
 		<label>Naam <input name="name" type="text" maxlength="16"></label>
 		<div>
 			<p>Gebruik alleen letters voor je gebruikersnaam.</p>
@@ -33,7 +35,7 @@
 			<input type="hidden" name="type" value="user">
 		{{/if}}
 		<div>
-			<input type="submit" value="Profiel aanmaken">
+			<input class="button call-to-action" type="submit" value="Profiel aanmaken">
 		</div>
 	</form>
 </main>

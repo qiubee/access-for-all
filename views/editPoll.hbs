@@ -1,5 +1,5 @@
 {{> creatorHeader}}
-<main id="content">
+<main id="content" class="edit-poll">
 	<h1>Poll <span>{{pollname}}</span> bewerken</h1>
 	<form action="/update-poll" method="POST">
 	<div>
@@ -34,7 +34,7 @@
 			{{/if}}
 			</ul>
 			</div>
-			<p><span>Vraag <em>{{title}}</em> </span><a href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
+			<p><span>Vraag <em>{{title}}</em> </span><a class="button" href="vraag-{{index}}-bewerken">bewerken</a><span> of </span><a class="button danger" href="vraag-{{index}}-verwijderen">verwijderen</a><span>.</span></p>
 			</li>
 			</section>
 			{{/each}}
@@ -42,15 +42,15 @@
 			{{#if questionLimit}}
 				<p>Je zit aan het maximum aan vragen</p>
 			{{else}}
-				<a href="vraag-toevoegen">Vraag toevoegen</a>
+				<a class="button call-to-action" href="vraag-toevoegen">Vraag toevoegen</a>
 			{{/if}}
 			<div>
-				<input type="submit" name="savequestions" value="Wijzigingen opslaan">
+				<input class="button" type="submit" name="savequestions" value="Wijzigingen opslaan">
 			</div>
 		</fieldset>
 	{{else}}
 		<p>Je hebt nog geen vragen voor de poll.</p>
-		<a href="vraag-toevoegen">Maak nieuwe vraag</a>
+		<a class="button call-to-action" href="vraag-toevoegen">Maak nieuwe vraag</a>
 	{{/if}}
 	
 	<fieldset>
@@ -95,11 +95,11 @@
 			{{/if}}
 		</fieldset>
 		<div>
-		<input type="submit" name="savesettings" value="Instellingen opslaan">
+		<input class="button" type="submit" name="savesettings" value="Instellingen opslaan">
 		</div>
 	</fieldset>
 	<input type="hidden" name="pollId" value="{{pollId}}">
 	<input type="hidden" name="creatorname" value="{{creatorname}}">
 	</form>
-	<a href="/c/{{creatorname}}">Ga terug naar mijn overzicht</a>
+	<a class="button" href="/c/{{creatorname}}">Ga terug naar mijn overzicht</a>
 </main>
