@@ -63,7 +63,7 @@
 				</form>
 				{{/if}}
 				{{#if question.showresults}}
-				<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
+				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
 				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> poll</span></a>
 				{{/if}}
 			{{else}}
@@ -74,6 +74,7 @@
 						<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
 					{{/each}}
 				</ul>
+				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
 				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
 				<h3>Instellingen</h3>
 				{{#if question.showresults}}
