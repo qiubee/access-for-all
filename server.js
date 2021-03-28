@@ -1,12 +1,14 @@
+const http = require("http");
 const express = require("express");
 const hbs = require("express-handlebars");
 const router = require("./routes/router");
-
+const sockets = require("./websockets");
 require("dotenv").config();
 
 // server
 const app = express();
-const port = process.env.PORT || 8000;
+const server = http.createServer(app);
+const PORT = process.env.PORT || 8000;
 
 // set handlebars as templating engine
 app.set("view engine", "hbs")
@@ -26,7 +28,10 @@ app.use(express.static("public")) // use public folder for static files
 			title: "O nee, de pagina bestaat niet · Polly"
 		});
 	})
-	.disable("x-powered-by")
-	.listen(port, function () {
-	console.log(`Listening on localhost:${port}`);
+	.disable("x-powered-by");
+
+sockets(server); // websockets implementation
+
+server.listen(PORT, function () {
+	console.log(`Listening on ${PORT}`);
 });
