@@ -1,13 +1,14 @@
 {{> pageHeader}}
-<main id="content">
+<main id="content" class="home">
 	<h1>Poll mee op Polly</h1>
 	<p>Creëer polls, zoek polls, en doe mee!</p>
 	<form action="/join" method="GET">
 	<h2>Doe mee aan een poll</h2>
 	<p>Voer de code in van de poll mee te doen.</p>
 	<label>Code <input name="pollnumber" type="search" maxlength="10" placeholder="Voer de code in van de poll"></label>
-	<input type="submit" value="Ga naar poll">
+	<input class="button" type="submit" value="Ga naar poll">
 	</form>
+	{{#if livePolls}}
 	<section>
 		<h2>Polls bezig op dit moment</h2>
 		{{#each livePolls}}
@@ -16,4 +17,5 @@
 			</article>
 		{{/each}}
 	</section>
+	{{/if}}
 </main>
