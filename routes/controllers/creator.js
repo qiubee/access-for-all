@@ -41,8 +41,9 @@ function creatorOverview(req, res) {
 }
 
 function createCreator(req, res) {
-	res.render("createCreator", {
-		title: "Creator profiel aanmaken · Polly"
+	res.render("createProfile", {
+		title: "Creator profiel aanmaken · Polly",
+		creator: true
 	});
 }
 
