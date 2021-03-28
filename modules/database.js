@@ -7,7 +7,7 @@ function addToDatabase(name, data) {
 }
 
 function readFromDatabase(name) {
-	console.log(currentDateTime() + `: Data loaded from: ${process.env.DB_FOLDER}/${name}.json"`);
+	console.log(currentDateTime() + `: Data loaded from: ${process.env.DB_FOLDER}/${name}.json`);
 	return readJSON(`${process.env.DB_FOLDER}/` + name + ".json");
 }
 
