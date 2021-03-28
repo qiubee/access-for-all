@@ -49,12 +49,23 @@ ul, ol {
     padding: 0;
 }
 
+
+/* links */
 a {
 	font-weight: 400;
 	display: inline-block;
     text-decoration: none;
 	color: blue;
 	color: var(--blue);
+}
+
+a:focus {
+	color: red;
+	color: var(--red);
+}
+
+a:hover {
+	color: #C26653;
 }
 
 body > header ul:last-child a:after,
@@ -67,16 +78,36 @@ main a:after {
 	background-color: var(--blue);
 }
 
+body > header ul:last-child a:hover:after,
+main a:hover:after {
+	background-color: #C26653;
+}
+
+body > header ul:last-child a:focus:after,
+main a:focus:after {
+	background-color: red;
+	background-color: var(--red);
+}
+
+
+/* form */
 fieldset {
 	border: none;
 }
 
+input[type="submit"]:hover {
+	cursor: pointer;
+}
+
+
+/* content */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 700;
 	color: blueviolet;
 	color: var(--dark-blue);
 	margin: 1em 0em 0.5em 0em;
 }
+
 
 /* hide */
 body > header nav > ul:first-child li:first-of-type,
@@ -98,12 +129,56 @@ body > header nav:after {
 
 /* classes */
 .button {
-	color: white;
+	color: #0d60cc;
 	font-weight: 500;
-	background-color: #C26653;
+	background-color: white;
 	padding: 0.4em;
+	margin: 0.5em 0;
 	border-radius: 0.5em;
-	border: solid 0.2em #a35444;
+	border: solid 0.2em #0d60cc;
+	filter: drop-shadow(0.1em 0.15em 0.2em rgba(13, 96, 204, 0.4));
+}
+
+.button:focus, .button:hover {
+	color: #1D338A;
+	background-color: #f9f9f9;
+	border-color: #1D338A;
+}
+
+.button.call-to-action {
+	color: white;
+	background-color: #2d83f3;
+	border-color: #0d60cc;
+	filter: drop-shadow(0.1em 0.15em 0.2em rgba(13, 96, 204, 0.4));
+}
+
+.button.call-to-action:focus, .button.call-to-action:hover {
+	background-color: #1e64c0;
+	border-color: #044eaf;
+}
+
+.button.danger {
+	color: white;
+	background-color: #C26653;
+	border-color: #a35444;
+	filter: drop-shadow(0.1em 0.15em 0.2em rgba(163, 84, 68, 0.6));
+}
+
+.button.danger:focus, .button.danger:hover {
+	background-color: #aa4b38;
+	border-color: #863d2e;
+}
+
+.button.activate {
+	color: #188d31;
+	border-color: #61d37a;
+	filter: drop-shadow(0.1em 0.15em 0.2em rgba(97, 211, 122, 0.6))
+}
+
+.button.activate:focus, .button.activate:hover {
+	color: #0a7521;
+	background-color: #f9f9f9;
+	border-color: #3fb358;
 }
 
 a.button::after {
