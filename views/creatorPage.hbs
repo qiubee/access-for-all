@@ -47,13 +47,13 @@
 		{{/each}}
 		</ul>
 		{{#if multiplePolls}}
-			<a href="/c/{{creatorname}}">Update polls</a>
+			<a class="button activate" href="/c/{{creatorname}}">Update polls</a>
 		{{else}}
-			<a href="/c/{{creatorname}}">Update poll</a>
+			<a class="button activate" href="/c/{{creatorname}}">Update poll</a>
 		{{/if}}
 	</section>
 	{{/if}}
-	<a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>
+	<a class="button call-to-action" href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>
 	<section>
 		<h2 id="my-polls">Mijn polls</h2>
 		{{#if myPolls}}
@@ -75,22 +75,22 @@
 							{{/each}}
 						</ol>
 					{{else}}
-					<p>Je hebt nog geen vragen. <a href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
+					<p>Je hebt nog geen vragen. <a class="button call-to-action" href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
 					{{/if}}
 					<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
 					{{#if active}}
-					<a href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
+					<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
 					{{else}}
 						<ul>
 							<li>
-								<a href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
+								<a class="button" href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
 							</li>
 							<li>
-								<a href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
+								<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
 							</li>
 						</ul>
 						{{#if questions}}
-							<a href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
+							<a class="button activate" href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
 						{{/if}}
 					{{/if}}
 				</article>
@@ -98,7 +98,7 @@
 			{{/each}}
 			</ul>
 		{{else}}
-		<p>Je hebt nog geen polls gemaakt. <a href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>.</p>
+		<p>Je hebt nog geen polls gemaakt. <a class="button call-to-action" href="/c/{{creatorname}}/maak-poll">Maak een nieuwe poll aan</a>.</p>
 		{{/if}}
 	</section>
 	<section>
@@ -111,12 +111,12 @@
 				</li>
 				{{/each}}
 			</ul>
-			<a href="/groep-aanmaken">Maak een nieuwe groep aan</a>
+			<a class="button call-to-action" href="/groep-aanmaken">Maak een nieuwe groep aan</a>
 		{{else}}
 		<p>Je bent nog niet aangesloten bij een groep. Je kunt zelf een groep maken of zoeken naar een groep om bij aan te sluiten.</p>
 		<ul>
-			<li><a href="/groep-aanmaken">Maak een nieuwe groep aan</a></li>
-			<li><a href="/groepen">Groep zoeken</a></li>
+			<li><a class="button call-to-action"  href="/groep-aanmaken">Maak een nieuwe groep aan</a></li>
+			<li><a class="button"  href="/groepen">Groep zoeken</a></li>
 		</ul>
 		{{/if}}
 	</section>
