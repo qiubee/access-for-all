@@ -26,7 +26,7 @@
 				<p>Jouw antwoord: <span>{{vote}}</span></p>
 					<p>Antwoorden:</p>
 					<ul>
-					{{#if poll.showresults}}
+					{{#if question.showresults}}
 						{{#each question.options}}
 							<li data-votes="{{votes}}">{{text}}</li>
 							<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
@@ -41,7 +41,7 @@
 				<form action="/vote" method="POST">
 					<fieldset>
 						<legend>Antwoorden</legend>
-						{{#if poll.showresults}}
+						{{#if question.showresults}}
 							{{#each question.options}}
 								<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
 								<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
@@ -62,7 +62,7 @@
 					</div>
 				</form>
 				{{/if}}
-				{{#if poll.showresults}}
+				{{#if question.showresults}}
 				<p><span>Het totaal aantal stemmen: </span>{{totalvotes}} stemmen<span>.</span></p>
 				<a href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> poll</span></a>
 				{{/if}}
@@ -95,3 +95,4 @@
 		</section>
 	</article>
 </main>
+<script src="/js/socket.js" type="text/javascript"></script>
