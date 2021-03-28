@@ -19,9 +19,34 @@ function poll(req, res) {
 		});
 	}
 
+	if (!data.anonymous && !data.username) {
+		return res.redirect(`/poll/${pollId}-`);
+	}
+
 	const currentQuestion = poll.questions.find(function (question) {
 		return question.index === poll.currentQuestion;
 	});
+
+	if (data.anonymous) {
+		if (data.vote) {
+			const vote = currentQuestion.options[parseInt(data.vote)].text;
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				voter: true,
+				hasVoted: true,
+				vote: vote,
+				poll: poll,
+				question: currentQuestion
+			});
+		} else {
+			return res.render("poll", {
+				title: `${poll.title} · Polly`,
+				voter: true,
+				poll: poll,
+				question: currentQuestion
+			});
+		}
+	}
 
 	const allUsers = db.read("users");
 	const user = allUsers.user.find(function (user) {
@@ -340,7 +365,7 @@ function voteOnPoll(req, res) {
 	if (data.username) {
 		res.redirect(`/poll/${pollId}${data.username}${optionNumberVoted}`);
 	} else {
-		res.redirect(`/poll/${pollId}${optionNumberVoted}`);
+		res.redirect(`/poll/${pollId}-${optionNumberVoted}`);
 	}
 }
 
