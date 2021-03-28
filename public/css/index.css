@@ -132,7 +132,7 @@ body > header nav:after {
 	color: #0d60cc;
 	font-weight: 500;
 	background-color: white;
-	padding: 0.4em;
+	padding: 0.4em 0.6em;
 	margin: 0.5em 0;
 	border-radius: 0.5em;
 	border: solid 0.2em #0d60cc;
