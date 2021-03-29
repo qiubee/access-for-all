@@ -156,45 +156,57 @@ ul article footer div.options ul:after {
 }
 
 .button:focus, .button:hover {
-	color: #1D338A;
+	color: #102579;
 	background-color: #f9f9f9;
-	border-color: #1D338A;
+	border-color: #0e216b;
 }
 
 .button.call-to-action {
 	color: white;
-	background-color: #2d83f3;
-	border-color: #0d60cc;
+	/* background-color: #2d83f3;
+	border-color: #0d60cc; */
+	background-color: #0953b4;
+	border-color: #053e88;
 	filter: drop-shadow(0.1em 0.15em 0.2em rgba(13, 96, 204, 0.4));
 }
 
 .button.call-to-action:focus, .button.call-to-action:hover {
-	background-color: #1e64c0;
-	border-color: #044eaf;
+	/* background-color: #1e64c0;
+	border-color: #044eaf; */
+	background-color: #2d83f3;
+	border-color: #0d60cc;
 }
 
 .button.danger {
 	color: white;
-	background-color: #C26653;
-	border-color: #a35444;
+	/* background-color: #C26653;
+	border-color: #a35444; */
+	background-color: #9e402d;
+	border-color: #702c1e;
 	filter: drop-shadow(0.1em 0.15em 0.2em rgba(163, 84, 68, 0.6));
 }
 
 .button.danger:focus, .button.danger:hover {
-	background-color: #aa4b38;
-	border-color: #863d2e;
+	/* background-color: #aa4b38;
+	border-color: #863d2e; */
+	background-color: #bd5743;
+	border-color: #914232;
 }
 
 .button.activate {
-	color: #188d31;
-	border-color: #61d37a;
+	/* color: #188d31;
+	border-color: #61d37a; */
+	color: #257236;
+	border-color: #04741c;
 	filter: drop-shadow(0.1em 0.15em 0.2em rgba(97, 211, 122, 0.6))
 }
 
 .button.activate:focus, .button.activate:hover {
-	color: #0a7521;
-	background-color: #f9f9f9;
-	border-color: #3fb358;
+	/* color: #0a7521;
+	border-color: #3fb358; */
+	color: #0c6d21;
+	border-color: #36944a;
+	background-color: #f0ebeb;
 }
 
 a.button::after {
@@ -334,7 +346,8 @@ h2[id="live-polls"] ~ ul article header ul {
 main.poll article header.creator ul li:first-child,
 h2[id="live-polls"] ~ ul article header ul li:first-child {
 	text-transform: capitalize;
-	background-color: #da5e45;
+	/* background-color: #da5e45; */
+	background-color: #bb5511;
 	color: white;
 	margin-bottom: 1em;
 	border-radius: 0.5em;
@@ -343,6 +356,7 @@ h2[id="live-polls"] ~ ul article header ul li:first-child {
 	display: inline-block;
 }
 
+main.poll article header.creator ul li:first-child:before,
 h2[id="live-polls"] ~ ul article header ul li:first-child:before {
 	content: "";
 	display: inline-block;
@@ -486,6 +500,14 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 		color: var(--orange);
 	}
 
+	.button.danger {
+		filter: drop-shadow(0.1em 0.15em 0.2em rgba(163, 84, 68, 0.3));
+	}
+
+	.button.activate {
+		filter: drop-shadow(0.15em 0.15em 0.2em rgba(97, 211, 122, 0.4));
+	}
+
 	body > header > nav svg path {
 		fill: #05d5d5;
 	}
@@ -501,7 +523,7 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 		background-color: var(--orange);
 	}
 
-	ul article section ol::before {
+	ul article section ol li:before {
 		color: #F2E96D;
 		color: var(--yellow);
 	}
