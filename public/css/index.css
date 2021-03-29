@@ -1,6 +1,6 @@
 :root {
-	--dark: #0E0223;
-	--dark-light-tone: #160730;
+	--dark: #0B0417;
+	--dark-light-tone: #191127;
 	--white: #F6DFE4;
 	--dark-blue: #041840;
 	--blue: #124BFA;
@@ -502,7 +502,8 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 
 	.button:focus, .button:hover {
 		color: #2f507a;
-		border-color: #384f6d;
+		border-color: orange;
+		border-color: var(--orange);
 	}
 
 	.button.danger {
