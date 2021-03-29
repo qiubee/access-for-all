@@ -13,10 +13,7 @@ function poll(req, res) {
 
 	// poll not found
 	if (!poll) {
-		return res.render("poll", {
-			title: "Poll niet gevonden · Polly",
-			nopoll: true
-		});
+		return res.redirect("poll-niet-gevonden");
 	}
 
 	if (!data.anonymous && !data.username) {
@@ -112,11 +109,33 @@ function poll(req, res) {
 	});
 }
 
+function noPoll(req, res) {
+	res.render("pollNotFound", {
+		title: `Poll niet gevonden · Polly`,
+	});
+}
+
 function joinPoll(req, res) {
-	const data = req.params;
+	const input = req.body.pollnumber;
 
-	console.log(data);
+	if (!input) {
+		return res.redirect("/poll-niet-gevonden");
+	}
 
+	const allPolls = db.read("polls");
+	const poll = allPolls.find(function (poll) {
+		return poll.pollId === input;
+	});
+
+	if (!poll) {
+		return res.redirect("/poll-niet-gevonden");
+	}
+
+	if (poll.visibility === "open") {
+		res.redirect(`/poll/${input}`);
+	} else {
+		res.redirect("/poll-niet-gevonden");
+	}
 }
 
 function startPoll(req, res) {
@@ -734,6 +753,7 @@ function getStandardTimeOptions(pollId, pollData=false) {
 
 exports.search = searchPolls;
 exports.poll = poll;
+exports.noPoll = noPoll;
 exports.create = pollCreator;
 exports.edit = pollEditor;
 exports.createQuestion = questionCreator;
