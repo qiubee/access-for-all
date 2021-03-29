@@ -1,0 +1,12 @@
+{{#if creatorname}}
+{{> creatorHeader}}
+{{else if user}}
+{{> userHeader}}
+{{else}}
+{{> pageHeader}}
+{{/if}}
+<main id="content" class="poll-not-found">
+	<h1>Poll niet gevonden</h1>
+	<p>Sorry, we hebben de poll niet kunnen vinden.</p>
+	<a class="button call-to-action" href="/zoek-poll">Zoek een poll</a>
+</main>
