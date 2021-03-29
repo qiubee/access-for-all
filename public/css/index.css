@@ -500,6 +500,11 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 		color: var(--orange);
 	}
 
+	.button:focus, .button:hover {
+		color: #2f507a;
+		border-color: #384f6d;
+	}
+
 	.button.danger {
 		filter: drop-shadow(0.1em 0.15em 0.2em rgba(163, 84, 68, 0.3));
 	}
@@ -516,6 +521,10 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 		color: wheat;
 		filter: drop-shadow(0.15em 0.15em 0 var(--red))
 	}
+
+	body > header ul ~ div > a:focus, body > header ul ~ div > a:hover {
+		color: #91dddf;
+	} 
 
 	body > header ul:last-child a:after,
 	main a:after {
