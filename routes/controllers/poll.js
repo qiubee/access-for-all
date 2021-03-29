@@ -13,7 +13,7 @@ function poll(req, res) {
 
 	// poll not found
 	if (!poll) {
-		return res.redirect("poll-niet-gevonden");
+		return res.redirect("/poll-niet-gevonden");
 	}
 
 	if (!data.anonymous && !data.username) {
