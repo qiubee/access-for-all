@@ -120,6 +120,8 @@ h2[id="live-polls"] ~ ul article header ul li:nth-child(2) span:first-child,
 h2[id="live-polls"] ~ ul article ol li span:first-of-type,
 h2[id="live-polls"] ~ ul article section:nth-of-type(2) li:first-child span,
 h2[id="live-polls"] ~ ul article a[href^="/poll/"] span,
+main.poll article header.creator ul li:first-child span,
+main.poll article header.creator ul li:nth-child(2) span:first-child,
 main.edit-question h1 span,
 main.edit-question h1 ~ a:first-of-type,
 main.edit-poll h1 span {
@@ -132,6 +134,7 @@ main.edit-poll h1 span {
 /* clearfix */
 body > header nav:after,
 ul article header:after,
+main.poll article header.creator:after,
 ul article footer p:after,
 ul article footer div.options ul:after {
 	content: "";
@@ -287,7 +290,7 @@ body > main {
 	margin-bottom: 2em;
 }
 
-main h1 {
+main > h1 {
 	margin-top: 0;
 }
 
@@ -302,22 +305,33 @@ article {
 	max-width: 20em;
 }
 
+main.poll article {
+	border: none;
+	background-color: initial;
+}
+
+main.poll article h1, main.poll article header.creator h1 {
+	font-size: 2em;
+}
+
 ul article header h2,
 ul article header h3 {
 	font-size: 1.4em;
 	max-width: 10em;
 }
 
-ul article header h3 {
+ul article header h3{
 	float: left;
 }
 
 ul article header h3 ~ p,
+main.poll article header.creator ul,
 h2[id="live-polls"] ~ ul article header ul {
 	float: right;
 	margin-top: 1.3em;
 }
 
+main.poll article header.creator ul li:first-child,
 h2[id="live-polls"] ~ ul article header ul li:first-child {
 	text-transform: capitalize;
 	background-color: #da5e45;
@@ -340,7 +354,8 @@ h2[id="live-polls"] ~ ul article header ul li:first-child:before {
 }
 
 ul article header h3 ~ p > span:first-child,
-h2[id="live-polls"] ~ ul article header ul li:nth-child(2) {
+h2[id="live-polls"] ~ ul article header ul li:nth-child(2),
+main.poll article header.creator ul li:nth-child(2) {
 	display: block;
 	font-weight: 500;
 	color: #041840;
@@ -349,6 +364,12 @@ h2[id="live-polls"] ~ ul article header ul li:nth-child(2) {
 	border:  0.2em solid #d8c483;
 	border-right-width: 0;
 	border-radius: 0.25em 0 0 0.25em;
+}
+
+main.poll article header.creator ul li:nth-child(2) {
+	border-right-width: initial;
+	border-radius: 0.25em;
+	margin-top: 0.1em;
 }
 
 h2[id="live-polls"] ~ ul article header ul li:nth-child(2) {
@@ -412,7 +433,8 @@ ul article footer div.options ul li {
 }
 
 ul article footer div.options ul li:last-child,
-h2[id="live-polls"] ~ ul article header ul li:nth-child(2) {
+h2[id="live-polls"] ~ ul article header ul li:nth-child(2),
+main.poll article header.creator ul li:nth-child(2) {
 	float: right;
 }
 
@@ -492,7 +514,7 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 
 /* @media */
 
-@mesdia (max-width: 30em) {
+@media (max-width: 30em) {
 	h2[id="live-polls"] ~ ul li {
 		max-width: 21.25em;
 		display: block;
