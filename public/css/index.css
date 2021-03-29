@@ -463,7 +463,7 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 }
 
 /* dark mode */
-@media (prefers-color-scheme: dak) {
+@media (prefers-color-scheme: dark) {
 	body, body.darkmode {
 		color: white;
 		color: var(--white);
