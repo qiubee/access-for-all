@@ -1,5 +1,5 @@
 {{> creatorHeader}}
-<main id="content">
+<main id="content" class="creator-page">
 	<h1>Hey, {{creatorname}}</h1>
 	<nav>
 		<ul>
@@ -21,7 +21,7 @@
 				<header>
 					<h3>{{title}}</h3>
 					<ul>
-						<li><span>De poll is op dit moment </span>Live</li>
+						<li><span>De poll is op dit moment </span>live</li>
 						<li><span>De poll is </span>{{visibility}}</li>
 						<li>Gestart<span> op</span> {{startTime}}</li>
 					</ul>
@@ -30,7 +30,7 @@
 					<h4>{{question.title}}</h4>
 					<ol>
 						{{#each question.options}}
-							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft {{votes}} stemmen.</span></li>
+							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft</span> {{votes}} stemmen<span>.</span></li>
 						{{/each}}
 					</ol>
 				</section>
@@ -68,31 +68,39 @@
 						{{#if singleQuestion}}1 vraag{{else}}{{questionCount}} vragen{{/if}}<span>.</span></span></p>
 					</header>
 					{{#if questions}}
+					<section>
 						<h4>Vragen</h4>
 						<ol>
 							{{#each questions}}
 									<li>{{title}}</li>
 							{{/each}}
 						</ol>
-					{{else}}
-					<p>Je hebt nog geen vragen. <a class="button call-to-action" href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
-					{{/if}}
-					<p>Laatst bijgewerkt op <time datetime="{{modified}}"><span>{{modifiedSentence}}</span></time><span>.</span></p>
-					{{#if active}}
-					<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
-					{{else}}
-						<ul>
-							<li>
-								<a class="button" href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
-							</li>
-							<li>
-								<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
-							</li>
-						</ul>
-						{{#if questions}}
-							<a class="button activate" href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
+					</section>
+					<footer>
+						{{else}}
+						<p>Je hebt nog geen vragen. <a class="button call-to-action" href="/c/{{creator}}/poll/{{pollId}}/vraag-toevoegen">Vraag toevoegen</a><span>.</span></p>
 						{{/if}}
-					{{/if}}
+						<p>Laatst bijgewerkt<span> op </span><time datetime="{{modified}}">{{modifiedSentence}}</time><span>.</span></p>
+						{{#if active}}
+						<div class="stop-poll">
+							<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/stop"><span>Poll </span>stoppen</a>
+						</div>
+						{{else}}
+						<div class="options">
+							<ul>
+								<li>
+									<a class="button" href="/c/{{creator}}/poll/{{pollId}}/edit"><span>Poll </span>bewerken</a>
+								</li>
+								<li>
+									<a class="button danger" href="/c/{{creator}}/poll/{{pollId}}/verwijderen"><span>Poll </span>verwijderen</a>
+								</li>
+							</ul>
+							{{#if questions}}
+								<a class="button activate" href="/c/{{creator}}/poll/{{pollId}}/start"><span>Poll </span>starten</a>
+							{{/if}}
+						</div>
+						{{/if}}
+					</footer>
 				</article>
 			</li>
 			{{/each}}
