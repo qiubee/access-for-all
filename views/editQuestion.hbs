@@ -12,7 +12,7 @@
 			{{/each}}
 		</ol>
 		{{#if nextOption}}
-			<a class="button" href="/c/{{creatorname}}/poll/{{pollId}}/vraag-{{questionNumber}}-bewerken{{optionCount}}">Antwoord toevoegen</a>
+			<a class="button call-to-action" href="/c/{{creatorname}}/poll/{{pollId}}/vraag-{{questionNumber}}-bewerken{{optionCount}}">Antwoord toevoegen</a>
 		{{/if}}
 	</fieldset>
 	<label>Tijd om op vraag te antwoorden:
@@ -47,5 +47,5 @@
 		<input class="button" type="submit" value="Wijzigingen opslaan">
 	</div>
 	</form>
-	<a href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
+	<a class="button" href="/c/{{creatorname}}/poll/{{pollId}}/edit">Ga terug<span> naar poll bewerken</span></a>
 </main>
