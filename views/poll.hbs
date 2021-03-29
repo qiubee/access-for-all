@@ -7,18 +7,21 @@
 {{/if}}
 <main id="content" class="poll">
 	<article>
+		{{#if voter}}
 		<header>
 			<h1>{{poll.title}}</h1>
-			{{#if voter}}
 				<p>Vraag {{poll.currentQuestion}} van {{poll.questionCount}}<span>.</span></p>
-			{{else}}
+		</header>
+		{{else}}
+		<header class="creator">
+			<h1>{{poll.title}}</h1>
 			<ul>
 				<li><span>De poll is op dit moment </span>Live</li>
 				<li><span>De poll is </span>{{poll.visibility}}</li>
 				<li>Gestart<span> op</span> {{startTime}}</li>
 			</ul>
-			{{/if}}
 		</header>
+		{{/if}}
 		<section>
 			<h2>{{question.title}}</h2>
 			{{#if voter}}
@@ -58,7 +61,7 @@
 						<input type="hidden" name="username" value="{{username}}">
 					{{/if}}
 					<div>
-						<input class="button" type="submit" value="Stem">
+						<input class="button call-to-action" type="submit" value="Stem">
 					</div>
 				</form>
 				{{/if}}
