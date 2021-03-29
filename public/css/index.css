@@ -526,7 +526,7 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 	}
 
 	body > header ul ~ div > a {
-		color: wheat;
+		color: #f5f5f5;
 		filter: drop-shadow(0.15em 0.15em 0 var(--red))
 	}
 
