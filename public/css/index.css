@@ -365,6 +365,7 @@ h2[id="live-polls"] ~ ul article header ul li:first-child:before {
 	margin: 0 0.5em 0.1em 0;
 	border-radius: 5em;
 	background-color: white;
+	animation: 4s ease-in-out infinite pulse;
 }
 
 ul article header h3 ~ p > span:first-child,
@@ -476,6 +477,7 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 	margin-right: 0.25em;
 }
 
+
 /* dark mode */
 @media (prefers-color-scheme: dark) {
 	body, body.darkmode {
@@ -549,8 +551,8 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 	}
 }
 
-/* @media */
 
+/* @media */
 @media (max-width: 30em) {
 	h2[id="live-polls"] ~ ul li {
 		max-width: 21.25em;
@@ -561,12 +563,20 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 }
 
 
-/* flexbox */
+/* animations */
+@keyframes pulse {
+	0% { opacity: 1; }
+	50% { opacity: 0; }
+	100% { opacity: 1; }
+  }
 
+
+/* flexbox */
 @supports (display: flex) {
 
 }
 
+/* grid */
 @supports (display: grid) {
 
 }
