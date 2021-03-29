@@ -122,8 +122,10 @@ h2[id="live-polls"] ~ ul article section:nth-of-type(2) li:first-child span,
 h2[id="live-polls"] ~ ul article a[href^="/poll/"] span,
 main.poll article header.creator ul li:first-child span,
 main.poll article header.creator ul li:nth-child(2) span:first-child,
+main.poll div.voted p:last-of-type,
+main.poll div.voted li span:nth-child(odd),
 main.poll form[action="/vote"] fieldset legend,
-form[action="/vote"] fieldset div p span,
+main.poll form[action="/vote"] fieldset div p span,
 main.edit-question h1 span,
 main.edit-question h1 ~ a:first-of-type,
 main.edit-poll h1 span {
@@ -139,7 +141,8 @@ ul article header:after,
 main.poll article header.creator:after,
 ul article footer p:after,
 ul article footer div.options ul:after,
-form[action="/vote"] fieldset div:after {
+form[action="/vote"] fieldset div:after,
+main.poll div.voted ul:after {
 	content: "";
 	clear: both;
 	display: table;
@@ -493,12 +496,34 @@ h2[id="live-polls"] ~ ul article a[href^="/poll/"] {
 	margin: 0.5em 0 1em 0;
 }
 
+main.poll div.voted p:first-of-type {
+	margin-bottom: 1.5em;
+}
+
+main.poll div.voted p:first-of-type span {
+	font-weight: 600;
+	font-style: italic;
+}
+
+main.poll div.voted ul {
+	margin-bottom: 1.5em;
+}
+
+main.poll div.voted li span:nth-child(2) {
+	float: right;
+	margin-right: 2em;
+}
+
 
 /* form */
 form[action="/update-vraag"] fieldset ol ~ a:before,
 form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 	content: "+";
 	margin-right: 0.25em;
+}
+
+form[action="/vote"] {
+	margin-top: 1.5em;
 }
 
 form[action="/vote"] fieldset div {
