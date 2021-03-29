@@ -46,8 +46,10 @@
 						<legend>Antwoorden</legend>
 						{{#if question.showresults}}
 							{{#each question.options}}
-								<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
-								<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+								<div>
+									<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
+									<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+								</div>
 							{{/each}}
 						{{else}}
 							{{#each question.options}}
