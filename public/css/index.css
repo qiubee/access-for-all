@@ -506,6 +506,11 @@ form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 		border-color: var(--orange);
 	}
 
+	.button.danger:focus, .button.danger:hover,
+	.button.call-to-action:focus, .button.call-to-action:hover {
+		color: white;
+	}
+
 	.button.danger {
 		filter: drop-shadow(0.1em 0.15em 0.2em rgba(163, 84, 68, 0.3));
 	}
