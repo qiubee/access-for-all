@@ -26,13 +26,13 @@
 			<h2>{{question.title}}</h2>
 			{{#if voter}}
 				{{#if hasVoted}}
+				<div class="voted">
 				<p>Jouw antwoord: <span>{{vote}}</span></p>
 					<p>Antwoorden:</p>
 					<ul>
 					{{#if question.showresults}}
 						{{#each question.options}}
-							<li data-votes="{{votes}}">{{text}}</li>
-							<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft </span><span>{{votes}} stemmen</span><span> gekregen.</span></li>
 						{{/each}}
 					{{else}}
 						{{#each question.options}}
@@ -40,6 +40,7 @@
 						{{/each}}
 					{{/if}}
 					</ul>
+				</div>
 				{{else}}
 				<form action="/vote" method="POST">
 					<fieldset>
