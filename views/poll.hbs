@@ -48,7 +48,7 @@
 							{{#each question.options}}
 								<div>
 									<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
-									<p>{{text}} heeft {{votes}} stemmen gekregen.</p>
+									<p><span>{{text}} heeft </span>{{votes}} stemmen<span> gekregen.</span></p>
 								</div>
 							{{/each}}
 						{{else}}
