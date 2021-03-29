@@ -122,6 +122,8 @@ h2[id="live-polls"] ~ ul article section:nth-of-type(2) li:first-child span,
 h2[id="live-polls"] ~ ul article a[href^="/poll/"] span,
 main.poll article header.creator ul li:first-child span,
 main.poll article header.creator ul li:nth-child(2) span:first-child,
+main.poll form[action="/vote"] fieldset legend,
+form[action="/vote"] fieldset div p span,
 main.edit-question h1 span,
 main.edit-question h1 ~ a:first-of-type,
 main.edit-poll h1 span {
@@ -136,7 +138,8 @@ body > header nav:after,
 ul article header:after,
 main.poll article header.creator:after,
 ul article footer p:after,
-ul article footer div.options ul:after {
+ul article footer div.options ul:after,
+form[action="/vote"] fieldset div:after {
 	content: "";
 	clear: both;
 	display: table;
@@ -408,6 +411,15 @@ ul article header ~ section::before {
 	background-color: #d8c483;
 }
 
+main.poll header[class="creator"] ~ section p:first-of-type {
+	margin-bottom: 1em;
+	font-weight: 500;
+}
+
+main.poll header[class="creator"] ~ section ul {
+	margin-bottom: 2em;
+}
+
 ul article section ol {
 	counter-reset: number;
 }
@@ -423,6 +435,18 @@ ul article section ol li::before {
 ul article section ol li {
 	display: inline-block;
 	margin-left: 1em;
+}
+
+header[class="creator"] ~ section h2 ~ ul li:before,
+article section h4 ~ ul li:before {
+	content: "";
+	display: inline-block;
+	height: 0.3em;
+	width: 0.3em;
+	margin: 0 0.5em 0.25em 0;
+	border-radius: 5em;
+	background-color: blueviolet;
+	background-color: var(--dark-blue);
 }
 
 ul article footer {
@@ -475,6 +499,18 @@ form[action="/update-vraag"] fieldset ol ~ a:before,
 form[action="/update-poll"] fieldset:first-of-type ol ~ a:before {
 	content: "+";
 	margin-right: 0.25em;
+}
+
+form[action="/vote"] fieldset div {
+	margin-bottom: 1em;
+}
+
+form[action="/vote"] fieldset div label input {
+	margin-right: 0.5em;
+}
+
+form[action="/vote"] fieldset div p {
+	float: right;
 }
 
 
