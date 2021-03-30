@@ -62,12 +62,14 @@ This wireflow shows the *Creator*-flow (or admin-flow) of the website.
 
 List of devices and browsers used for testing:
 
-* [Browsers](#browsers)
-	* [Firefox 86.0.1](#firefox)
-	* [Brave 1.22.67 (Chromium 89)](#brave)
-* [Mobile](#mobile)
-	* [iOS Safari 9 (iPod Touch)](#ios-safari-9)
-	* [Mobile Firefox (LG)](#mobile-firefox)
+* [Browsers](https://github.com/qiubee/access-for-all/wiki/test#browsers)
+	* [Firefox 86.0.1](https://github.com/qiubee/access-for-all/wiki/test#firefox)
+	* [Brave 1.22.67 (Chromium 89)](https://github.com/qiubee/access-for-all/wiki/test#brave)
+* [Mobile](https://github.com/qiubee/access-for-all/wiki/test#mobile)
+	* [iOS Safari 9 (iPod Touch)](https://github.com/qiubee/access-for-all/wiki/test#ios-safari-9)
+	* [Mobile Firefox (LG)](https://github.com/qiubee/access-for-all/wiki/test#mobile-firefox)
+
+[**Lees test verslag**](https://github.com/qiubee/access-for-all/wiki/test)
 
 ## Miscellaneous
 
