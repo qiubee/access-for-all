@@ -67,7 +67,7 @@ List of devices and browsers used for testing:
 	* [Brave 1.22.67 (Chromium 89)](#brave)
 * [Mobile](#mobile)
 	* [iOS Safari 9 (iPod Touch)](#ios-safari-9)
-	* [Chrome (LG)](#chrome)
+	* [Mobile Firefox (LG)](#mobile-firefox)
 
 ## Miscellaneous
 
