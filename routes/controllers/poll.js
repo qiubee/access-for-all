@@ -31,7 +31,9 @@ function poll(req, res) {
 				title: `${poll.title} · Polly`,
 				voter: true,
 				hasVoted: true,
-				vote: vote,
+				anonymous: true,
+				voteText: vote,
+				voteIndex: data.vote,
 				poll: poll,
 				question: currentQuestion
 			});
@@ -58,7 +60,8 @@ function poll(req, res) {
 				user: user,
 				voter: true,
 				hasVoted: true,
-				vote: vote,
+				voteText: vote,
+				voteIndex: data.vote,
 				username: user.username,
 				poll: poll,
 				question: currentQuestion

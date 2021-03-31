@@ -27,7 +27,7 @@
 			{{#if voter}}
 				{{#if hasVoted}}
 				<div class="voted">
-				<p>Jouw antwoord: <span>{{vote}}</span></p>
+				<p>Jouw antwoord: <span>{{voteText}}</span></p>
 					<p>Antwoorden:</p>
 					<ul>
 					{{#if question.showresults}}
@@ -41,6 +41,14 @@
 					{{/if}}
 					</ul>
 				</div>
+					{{#if question.showresults}}
+						<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
+						{{#if anonymous}}
+							<a class="button activate" href="/poll/{{poll.pollId}}-{{voteIndex}}">Update<span> poll</span></a>
+						{{else}}
+							<a class="button activate" href="/poll/{{poll.pollId}}{{username}}{{voteIndex}}">Update<span> poll</span></a>
+						{{/if}}
+					{{/if}}
 				{{else}}
 				<form action="/vote" method="POST">
 					<fieldset>
@@ -67,10 +75,10 @@
 						<input class="button call-to-action" type="submit" value="Stem">
 					</div>
 				</form>
-				{{/if}}
-				{{#if question.showresults}}
-				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
-				<a class="button activate" href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> poll</span></a>
+					{{#if question.showresults}}
+					<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
+					<a class="button activate" href="/poll/{{poll.pollId}}{{username}}">Update<span> poll</span></a>
+					{{/if}}
 				{{/if}}
 			{{else}}
 				<p>Antwoorden:</p>
