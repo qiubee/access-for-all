@@ -125,7 +125,7 @@ main.poll article header.creator ul li:nth-child(2) span:first-child,
 main.poll div.voted p:last-of-type,
 main.poll div.voted li span:nth-child(odd),
 main.poll form[action="/vote"] fieldset legend,
-main.poll form[action="/vote"] fieldset div p span,
+main.poll form[action="/vote"] fieldset div p span:nth-child(odd),
 main.edit-question h1 span,
 main.edit-question h1 ~ a:first-of-type,
 main.edit-poll h1 span {
