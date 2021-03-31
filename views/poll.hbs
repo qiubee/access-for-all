@@ -32,7 +32,7 @@
 					<ul>
 					{{#if question.showresults}}
 						{{#each question.options}}
-							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft </span><span>{{votes}} stemmen</span><span> gekregen.</span></li>
+							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft </span><span class="results">{{votes}}</span><span> stemmen gekregen.</span></li>
 						{{/each}}
 					{{else}}
 						{{#each question.options}}
@@ -57,7 +57,7 @@
 							{{#each question.options}}
 								<div>
 									<label data-votes="{{votes}}"><input type="radio" name="answer" value="{{text}}">{{text}}</label>
-									<p><span>{{text}} heeft </span>{{votes}} stemmen<span> gekregen.</span></p>
+									<p><span>{{text}} heeft </span><span class="results">{{votes}}</span><span> stemmen gekregen.</span></p>
 								</div>
 							{{/each}}
 						{{else}}
@@ -76,7 +76,7 @@
 					</div>
 				</form>
 					{{#if question.showresults}}
-					<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
+					<p><span>Het totaal aantal stemmen: </span><span>{{poll.totalvotes}} stemmen</span><span>.</span></p>
 					<a class="button activate" href="/poll/{{poll.pollId}}{{username}}">Update<span> poll</span></a>
 					{{/if}}
 				{{/if}}
