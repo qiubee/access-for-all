@@ -42,7 +42,7 @@
 					</ul>
 				</div>
 					{{#if question.showresults}}
-						<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
+						<p><span>Het totaal aantal stemmen: </span><span class="total">{{poll.totalvotes}}</span><span> stemmen</span><span>.</span></p>
 						{{#if anonymous}}
 							<a class="button activate" href="/poll/{{poll.pollId}}-{{voteIndex}}">Update<span> poll</span></a>
 						{{else}}
@@ -76,7 +76,7 @@
 					</div>
 				</form>
 					{{#if question.showresults}}
-					<p><span>Het totaal aantal stemmen: </span><span>{{poll.totalvotes}} stemmen</span><span>.</span></p>
+					<p><span>Het <span>totaal</span> aantal stemmen: </span><span class="total">{{poll.totalvotes}}</span><span> stemmen</span><span>.</span></p>
 					<a class="button activate" href="/poll/{{poll.pollId}}{{username}}">Update<span> poll</span></a>
 					{{/if}}
 				{{/if}}
@@ -87,7 +87,7 @@
 						<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft</span> {{votes}} stemmen<span>.</span></li>
 					{{/each}}
 				</ul>
-				<p><span>Het totaal aantal stemmen: </span>{{poll.totalvotes}} stemmen<span>.</span></p>
+				<p><span>Het totaal aantal stemmen: </span><span class="total">{{poll.totalvotes}}</span><span> stemmen</span><span>.</span></p>
 				<a class="button activate" href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
 				<h3>Instellingen</h3>
 				{{#if question.showresults}}
