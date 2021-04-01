@@ -27,12 +27,12 @@
 			{{#if voter}}
 				{{#if hasVoted}}
 				<div class="voted">
-				<p>Jouw antwoord: <span>{{voteText}}</span></p>
+				<p data-index="{{poll.currentQuestion}}">Jouw antwoord: <span>{{voteText}}</span></p>
 					<p>Antwoorden:</p>
 					<ul>
 					{{#if question.showresults}}
 						{{#each question.options}}
-							<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft </span><span class="results">{{votes}}</span><span> stemmen gekregen.</span></li>
+							<li>{{text}}<span>. {{text}} heeft </span><span class="results">{{votes}}</span><span> stemmen gekregen.</span></li>
 						{{/each}}
 					{{else}}
 						{{#each question.options}}
@@ -84,14 +84,14 @@
 				<p>Antwoorden:</p>
 				<ul>
 					{{#each question.options}}
-						<li data-votes="{{votes}}">{{text}}<span>. {{text}} heeft</span> {{votes}} stemmen<span>.</span></li>
+						<li>{{text}}<span>. {{text}} heeft </span><span class="results">{{votes}}</span> stemmen<span>.</span></li>
 					{{/each}}
 				</ul>
 				<p><span>Het totaal aantal stemmen: </span><span class="total">{{poll.totalvotes}}</span><span> stemmen</span><span>.</span></p>
 				<a class="button activate" href="/poll/{{poll.pollId}}{{creatorname}}">Update<span> antwoorden</span></a>
 				<h3>Instellingen</h3>
 				{{#if question.showresults}}
-					<p>Resultaten worden weergegeven.</p>
+					<p data-index="{{poll.currentQuestion}}">Resultaten worden weergegeven.</p>
 				{{else}}
 					<form action="/update-vraag" method="POST">
 						<label>Resultaten weergeven <input type="checkbox" name="showresults"></label>
