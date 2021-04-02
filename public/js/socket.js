@@ -16,7 +16,7 @@ if (window.WebSocket) {
 		});
 	});
 
-	// create socket & add listeneres
+	// create socket & add listeners
 	const socket = new WebSocket(host);
 	socket.addEventListener("open", function () {
 		const pollId = window.location.pathname.match(/[0-9]{8,12}/g)[0];
