@@ -2,7 +2,6 @@ const { currentDateTime } = require("./modules/date");
 const WebSocket = require("ws");
 const { watch } = require("fs");
 const db = require("./modules/database");
-const { eventNames } = require("process");
 require("dotenv").config();
 
 const FOLDER = process.env.DB_FOLDER || "data";
@@ -16,6 +15,7 @@ module.exports = function (server) {
 		console.log(currentDateTime() + `: New socket client (total: ${clients})`);
 
 		socket.on("message", function incoming(message) {
+			let input;
 			try {
 				input = JSON.parse(message);
 			} catch (err) {
@@ -51,9 +51,6 @@ module.exports = function (server) {
 					}
 				});
 			}
-
-			// const newMessage = JSON.stringify(output);
-			// socket.send(newMessage);
 		});
 
 		socket.on("close", function close() {
