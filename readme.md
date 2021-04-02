@@ -6,14 +6,14 @@ Create polls, share polls, join and vote!
 
 [**Go to the website >**](https://polly-y.herokuapp.com/)
 
-## Content
+## Table of Contents
 
-* [Dependencies](#dependencies)
-* [Installation](#installation)
-* [Functionalities](#functionalities)
-* [Wireflow](#wireflow)
-* [Testing](#testing)
-* [Miscellaneous](#miscellaneous)
+1. [**Dependencies**](#dependencies)
+2. [**Installation**](#installation)
+3. [**Functionalities**](#functionalities)
+4. [**Wireflow**](#wireflow)
+5. [**Testing**](#testing)
+6. [**Miscellaneous**](#miscellaneous)
 
 ## Dependencies
 
