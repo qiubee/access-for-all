@@ -68,11 +68,11 @@ Dark mode and animations for supported browsers and real-time poll results.
 
 I use the **WebSockets API** to send votes to the server and display results in real-time.
 
-With the Websockets API it is possible to create a seamless connection between the client and server with the data transfered in real-time to and from the server. I've used it to
+With the Websockets API it is possible to create a seamless connection between the client and server with the data transfered in real-time to and from the server. I've used it to when a client submits a vote, the new results will be simultaneously updated to all users of the poll.
 
 ```js
 if ("WebSocket" in window) {
-	// websocket implementation
+	// get updated results instantaneously
 }
 ```
 
