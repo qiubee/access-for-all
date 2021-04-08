@@ -1,4 +1,4 @@
-if (window.WebSocket) {
+if ("WebSocket" in window) {
 	// get websocket hostname
 	const host = location.origin.replace(/^http/, "ws");
 
