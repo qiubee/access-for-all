@@ -66,13 +66,25 @@ Dark mode and animations for supported browsers and real-time poll results.
 
 ## Browser Technology
 
-I use the **WebSockets API** to send votes to the server and  display results in real-time.
+I use the **WebSockets API** to send votes to the server and display results in real-time.
 
-With the Websockets API it is possible to create a seamless connection between the client and server with the data transfered in real-time to and from the server.
+With the Websockets API it is possible to create a seamless connection between the client and server with the data transfered in real-time to and from the server. I've used it to
+
+```js
+if ("WebSocket" in window) {
+	// websocket implementation
+}
+```
 
 ### Fallbacks
 
-If the WebSockets API isn't supported it will try to detect if the **Fetch API** is available. If so then the new results will be periodically fetched from the server.
+If the WebSockets API isn't supported the second option is to detect if the **Fetch API** is available. If so then the new results can be periodically fetched from the server.
+
+```js
+if ("fetch" in window) {
+	// periodically fetch data from server
+}
+```
 
 If the two API's are not supported it will fall back to the HTML version.
 
